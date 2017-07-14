@@ -30,6 +30,7 @@ import net.kyori.lunar.function.ThrowingConsumer;
 import net.kyori.lunar.function.ThrowingFunction;
 import net.kyori.lunar.function.ThrowingSupplier;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -37,6 +38,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * A collection of methods for working with exceptions.
@@ -61,6 +63,25 @@ public final class Exceptions {
   }
 
   /**
+   * Returns a consumer which will unwrap and rethrow any throwables caught in {@code consumer}.
+   *
+   * @param consumer the consumer
+   * @param <T> the input type
+   * @param <E> the exception type
+   * @return a consumer
+   */
+  @Nonnull
+  public static <T, E extends Exception> Consumer<T> unwrappingRethrowConsumer(@Nonnull final ThrowingConsumer<T, E> consumer) {
+    return input -> {
+      try {
+        consumer.throwingAccept(input);
+      } catch(final Throwable t) {
+        throw rethrow(unwrap(t));
+      }
+    };
+  }
+
+  /**
    * Returns the same throwing bi-consumer.
    *
    * @param consumer the bi-consumer
@@ -75,6 +96,26 @@ public final class Exceptions {
   }
 
   /**
+   * Returns a consumer which will unwrap and rethrow any throwables caught in {@code consumer}.
+   *
+   * @param consumer the consumer
+   * @param <T> the first input type
+   * @param <U> the second input type
+   * @param <E> the exception type
+   * @return a consumer
+   */
+  @Nonnull
+  public static <T, U, E extends Exception> BiConsumer<T, U> unwrappingRethrowConsumer(@Nonnull final ThrowingBiConsumer<T, U, E> consumer) {
+    return (first, second) -> {
+      try {
+        consumer.throwingAccept(first, second);
+      } catch(final Throwable th) {
+        throw rethrow(unwrap(th));
+      }
+    };
+  }
+
+  /**
    * Returns the same throwing function.
    *
    * @param function the function
@@ -86,6 +127,26 @@ public final class Exceptions {
   @Nonnull
   public static <T, R, E extends Exception> Function<T, R> rethrowFunction(@Nonnull final ThrowingFunction<T, R, E> function) {
     return function;
+  }
+
+  /**
+   * Returns a function which will unwrap and rethrow any throwables caught in {@code function}.
+   *
+   * @param function the function
+   * @param <T> the input type
+   * @param <R> the output type
+   * @param <E> the exception type
+   * @return a function
+   */
+  @Nonnull
+  public static <T, R, E extends Exception> Function<T, R> unwrappingRethrowFunction(@Nonnull final ThrowingFunction<T, R, E> function) {
+    return input -> {
+      try {
+        return function.throwingApply(input);
+      } catch(final Throwable t) {
+        throw rethrow(unwrap(t));
+      }
+    };
   }
 
   /**
@@ -104,6 +165,27 @@ public final class Exceptions {
   }
 
   /**
+   * Returns a function which will unwrap and rethrow any throwables caught in {@code function}.
+   *
+   * @param function the function
+   * @param <T> the first input type
+   * @param <U> the second input type
+   * @param <R> the output type
+   * @param <E> the exception type
+   * @return a bi-function
+   */
+  @Nonnull
+  public static <T, U, R, E extends Exception> BiFunction<T, U, R> unwrappingRethrowFunction(@Nonnull final ThrowingBiFunction<T, U, R, E> function) {
+    return (first, second) -> {
+      try {
+        return function.throwingApply(first, second);
+      } catch(final Throwable t) {
+        throw rethrow(unwrap(t));
+      }
+    };
+  }
+
+  /**
    * Returns the same throwing supplier.
    *
    * @param supplier the supplier
@@ -117,6 +199,25 @@ public final class Exceptions {
   }
 
   /**
+   * Returns a supplier which will unwrap and rethrow any throwables caught in {@code supplier}.
+   *
+   * @param supplier the supplier
+   * @param <T> the output type
+   * @param <E> the exception type
+   * @return a supplier
+   */
+  @Nonnull
+  public static <T, E extends Exception> Supplier<T> unwrappingRethrowSupplier(@Nonnull final ThrowingSupplier<T, E> supplier) {
+    return () -> {
+      try {
+        return supplier.throwingGet();
+      } catch(final Throwable t) {
+        throw rethrow(unwrap(t));
+      }
+    };
+  }
+
+  /**
    * Re-throws an exception, sneakily.
    *
    * @param exception the exception
@@ -124,6 +225,7 @@ public final class Exceptions {
    * @return nothing
    * @throws E the exception
    */
+  @Nonnull
   public static <E extends Throwable> RuntimeException rethrow(@Nonnull final Throwable exception) throws E {
     throw (E) exception;
   }
@@ -141,5 +243,22 @@ public final class Exceptions {
   public static RuntimeException propagate(@Nonnull final Throwable throwable) {
     Throwables.throwIfUnchecked(throwable);
     throw new RuntimeException(throwable);
+  }
+
+  /**
+   * Unwraps a throwable.
+   *
+   * @param throwable the throwable
+   * @return the unwrapped throwable, or the original throwable
+   */
+  @Nonnull
+  public static Throwable unwrap(@Nonnull final Throwable throwable) {
+    if(throwable instanceof InvocationTargetException) {
+      @Nullable final Throwable cause = throwable.getCause();
+      if(cause != null) {
+        return cause;
+      }
+    }
+    return throwable;
   }
 }
