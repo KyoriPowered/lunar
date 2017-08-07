@@ -43,7 +43,6 @@ import javax.annotation.Nullable;
 /**
  * A collection of methods for working with exceptions.
  */
-// TODO: tests
 public final class Exceptions {
 
   private Exceptions() {
