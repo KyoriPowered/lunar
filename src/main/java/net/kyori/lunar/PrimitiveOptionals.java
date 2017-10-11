@@ -26,6 +26,7 @@ package net.kyori.lunar;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.function.DoubleToIntFunction;
+import java.util.function.DoubleUnaryOperator;
 
 import javax.annotation.Nonnull;
 
@@ -37,6 +38,20 @@ import static java.util.Objects.requireNonNull;
 public final class PrimitiveOptionals {
 
   private PrimitiveOptionals() {
+  }
+
+  /**
+   * Apply the provided mapping operator to the {@code optional} if a value is present,
+   * and return an {@code OptionalDouble} describing the result.
+   *
+   * @param optional the optional
+   * @param operator the operator
+   * @return an optional
+   */
+  @Nonnull
+  public static OptionalDouble map(@Nonnull final OptionalDouble optional, @Nonnull final DoubleUnaryOperator operator) {
+    requireNonNull(operator, "operator");
+    return optional.isPresent() ? OptionalDouble.of(operator.applyAsDouble(optional.getAsDouble())) : OptionalDouble.empty();
   }
 
   /**
