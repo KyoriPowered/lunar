@@ -24,8 +24,7 @@
 package net.kyori.lunar.reflect;
 
 import com.google.common.reflect.TypeToken;
-
-import javax.annotation.Nonnull;
+import net.kyori.blizzard.NonNull;
 
 /**
  * A type that knows its own type parameter.
@@ -33,12 +32,11 @@ import javax.annotation.Nonnull;
  * @param <T> the type
  */
 public interface Reified<T> {
-
   /**
    * Gets a type token representing the type parameter.
    *
    * @return a type token
    */
-  @Nonnull
+  @NonNull
   TypeToken<T> type();
 }

@@ -23,6 +23,8 @@
  */
 package net.kyori.lunar.concurrent;
 
+import net.kyori.blizzard.NonNull;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -32,19 +34,16 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import javax.annotation.Nonnull;
-
 /**
  * An executor service which forwards all its method calls to another executor service.
  */
 public interface ForwardingExecutorService extends ExecutorService {
-
   /**
    * Gets the forwarded executor service that methods are forwarded to.
    *
    * @return the forwarded executor service
    */
-  @Nonnull
+  @NonNull
   ExecutorService executorService();
 
   @Override
@@ -52,7 +51,7 @@ public interface ForwardingExecutorService extends ExecutorService {
     this.executorService().shutdown();
   }
 
-  @Nonnull
+  @NonNull
   @Override
   default List<Runnable> shutdownNow() {
     return this.executorService().shutdownNow();
@@ -69,53 +68,53 @@ public interface ForwardingExecutorService extends ExecutorService {
   }
 
   @Override
-  default boolean awaitTermination(final long timeout, @Nonnull final TimeUnit unit) throws InterruptedException {
+  default boolean awaitTermination(final long timeout, @NonNull final TimeUnit unit) throws InterruptedException {
     return this.executorService().awaitTermination(timeout, unit);
   }
 
-  @Nonnull
+  @NonNull
   @Override
-  default <T> Future<T> submit(@Nonnull final Callable<T> task) {
+  default <T> Future<T> submit(@NonNull final Callable<T> task) {
     return this.executorService().submit(task);
   }
 
-  @Nonnull
+  @NonNull
   @Override
-  default <T> Future<T> submit(@Nonnull final Runnable task, final T result) {
+  default <T> Future<T> submit(@NonNull final Runnable task, final T result) {
     return this.executorService().submit(task, result);
   }
 
-  @Nonnull
+  @NonNull
   @Override
-  default Future<?> submit(@Nonnull final Runnable task) {
+  default Future<?> submit(@NonNull final Runnable task) {
     return this.executorService().submit(task);
   }
 
-  @Nonnull
+  @NonNull
   @Override
-  default <T> List<Future<T>> invokeAll(@Nonnull final Collection<? extends Callable<T>> tasks) throws InterruptedException {
+  default <T> List<Future<T>> invokeAll(@NonNull final Collection<? extends Callable<T>> tasks) throws InterruptedException {
     return this.executorService().invokeAll(tasks);
   }
 
-  @Nonnull
+  @NonNull
   @Override
-  default <T> List<Future<T>> invokeAll(@Nonnull final Collection<? extends Callable<T>> tasks, final long timeout, @Nonnull final TimeUnit unit) throws InterruptedException {
+  default <T> List<Future<T>> invokeAll(@NonNull final Collection<? extends Callable<T>> tasks, final long timeout, @NonNull final TimeUnit unit) throws InterruptedException {
     return this.executorService().invokeAll(tasks, timeout, unit);
   }
 
-  @Nonnull
+  @NonNull
   @Override
-  default <T> T invokeAny(@Nonnull final Collection<? extends Callable<T>> tasks) throws ExecutionException, InterruptedException {
+  default <T> T invokeAny(@NonNull final Collection<? extends Callable<T>> tasks) throws ExecutionException, InterruptedException {
     return this.executorService().invokeAny(tasks);
   }
 
   @Override
-  default <T> T invokeAny(@Nonnull final Collection<? extends Callable<T>> tasks, final long timeout, @Nonnull final TimeUnit unit) throws ExecutionException, InterruptedException, TimeoutException {
+  default <T> T invokeAny(@NonNull final Collection<? extends Callable<T>> tasks, final long timeout, @NonNull final TimeUnit unit) throws ExecutionException, InterruptedException, TimeoutException {
     return this.executorService().invokeAny(tasks, timeout, unit);
   }
 
   @Override
-  default void execute(@Nonnull final Runnable command) {
+  default void execute(@NonNull final Runnable command) {
     this.executorService().execute(command);
   }
 }

@@ -24,6 +24,8 @@
 package net.kyori.lunar.exception;
 
 import com.google.common.base.Throwables;
+import net.kyori.blizzard.NonNull;
+import net.kyori.blizzard.Nullable;
 import net.kyori.lunar.function.ThrowingBiConsumer;
 import net.kyori.lunar.function.ThrowingBiFunction;
 import net.kyori.lunar.function.ThrowingConsumer;
@@ -37,14 +39,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 /**
  * A collection of methods for working with exceptions.
  */
 public final class Exceptions {
-
   private Exceptions() {
   }
 
@@ -56,8 +54,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return the consumer
    */
-  @Nonnull
-  public static <T, E extends Exception> Consumer<T> rethrowConsumer(@Nonnull final ThrowingConsumer<T, E> consumer) {
+  @NonNull
+  public static <T, E extends Exception> Consumer<T> rethrowConsumer(@NonNull final ThrowingConsumer<T, E> consumer) {
     return consumer;
   }
 
@@ -69,8 +67,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return a consumer
    */
-  @Nonnull
-  public static <T, E extends Exception> Consumer<T> unwrappingRethrowConsumer(@Nonnull final ThrowingConsumer<T, E> consumer) {
+  @NonNull
+  public static <T, E extends Exception> Consumer<T> unwrappingRethrowConsumer(@NonNull final ThrowingConsumer<T, E> consumer) {
     return input -> {
       try {
         consumer.throwingAccept(input);
@@ -89,8 +87,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return the bi-consumer
    */
-  @Nonnull
-  public static <T, U, E extends Exception> BiConsumer<T, U> rethrowConsumer(@Nonnull final ThrowingBiConsumer<T, U, E> consumer) {
+  @NonNull
+  public static <T, U, E extends Exception> BiConsumer<T, U> rethrowConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
     return consumer;
   }
 
@@ -103,8 +101,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return a consumer
    */
-  @Nonnull
-  public static <T, U, E extends Exception> BiConsumer<T, U> unwrappingRethrowConsumer(@Nonnull final ThrowingBiConsumer<T, U, E> consumer) {
+  @NonNull
+  public static <T, U, E extends Exception> BiConsumer<T, U> unwrappingRethrowConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
     return (first, second) -> {
       try {
         consumer.throwingAccept(first, second);
@@ -123,8 +121,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return the function
    */
-  @Nonnull
-  public static <T, R, E extends Exception> Function<T, R> rethrowFunction(@Nonnull final ThrowingFunction<T, R, E> function) {
+  @NonNull
+  public static <T, R, E extends Exception> Function<T, R> rethrowFunction(@NonNull final ThrowingFunction<T, R, E> function) {
     return function;
   }
 
@@ -137,8 +135,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return a function
    */
-  @Nonnull
-  public static <T, R, E extends Exception> Function<T, R> unwrappingRethrowFunction(@Nonnull final ThrowingFunction<T, R, E> function) {
+  @NonNull
+  public static <T, R, E extends Exception> Function<T, R> unwrappingRethrowFunction(@NonNull final ThrowingFunction<T, R, E> function) {
     return input -> {
       try {
         return function.throwingApply(input);
@@ -158,8 +156,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return the bi-function
    */
-  @Nonnull
-  public static <T, U, R, E extends Exception> BiFunction<T, U, R> rethrowFunction(@Nonnull final ThrowingBiFunction<T, U, R, E> function) {
+  @NonNull
+  public static <T, U, R, E extends Exception> BiFunction<T, U, R> rethrowFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
     return function;
   }
 
@@ -173,8 +171,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return a bi-function
    */
-  @Nonnull
-  public static <T, U, R, E extends Exception> BiFunction<T, U, R> unwrappingRethrowFunction(@Nonnull final ThrowingBiFunction<T, U, R, E> function) {
+  @NonNull
+  public static <T, U, R, E extends Exception> BiFunction<T, U, R> unwrappingRethrowFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
     return (first, second) -> {
       try {
         return function.throwingApply(first, second);
@@ -192,8 +190,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return the supplier
    */
-  @Nonnull
-  public static <T, E extends Exception> Supplier<T> rethrowSupplier(@Nonnull final ThrowingSupplier<T, E> supplier) {
+  @NonNull
+  public static <T, E extends Exception> Supplier<T> rethrowSupplier(@NonNull final ThrowingSupplier<T, E> supplier) {
     return supplier;
   }
 
@@ -205,8 +203,8 @@ public final class Exceptions {
    * @param <E> the exception type
    * @return a supplier
    */
-  @Nonnull
-  public static <T, E extends Exception> Supplier<T> unwrappingRethrowSupplier(@Nonnull final ThrowingSupplier<T, E> supplier) {
+  @NonNull
+  public static <T, E extends Exception> Supplier<T> unwrappingRethrowSupplier(@NonNull final ThrowingSupplier<T, E> supplier) {
     return () -> {
       try {
         return supplier.throwingGet();
@@ -224,8 +222,8 @@ public final class Exceptions {
    * @return nothing
    * @throws E the exception
    */
-  @Nonnull
-  public static <E extends Throwable> RuntimeException rethrow(@Nonnull final Throwable exception) throws E {
+  @NonNull
+  public static <E extends Throwable> RuntimeException rethrow(@NonNull final Throwable exception) throws E {
     throw (E) exception;
   }
 
@@ -239,7 +237,7 @@ public final class Exceptions {
    * @see Throwables#propagate(Throwable)
    * @see Throwables#throwIfUnchecked(Throwable)
    */
-  public static RuntimeException propagate(@Nonnull final Throwable throwable) {
+  public static RuntimeException propagate(@NonNull final Throwable throwable) {
     Throwables.throwIfUnchecked(throwable);
     throw new RuntimeException(throwable);
   }
@@ -250,8 +248,8 @@ public final class Exceptions {
    * @param throwable the throwable
    * @return the unwrapped throwable, or the original throwable
    */
-  @Nonnull
-  public static Throwable unwrap(@Nonnull final Throwable throwable) {
+  @NonNull
+  public static Throwable unwrap(@NonNull final Throwable throwable) {
     if(throwable instanceof InvocationTargetException) {
       @Nullable final Throwable cause = throwable.getCause();
       if(cause != null) {

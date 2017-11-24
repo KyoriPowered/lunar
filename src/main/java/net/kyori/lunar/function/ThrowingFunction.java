@@ -36,7 +36,6 @@ import java.util.function.Function;
  */
 @FunctionalInterface
 public interface ThrowingFunction<T, R, E extends Throwable> extends Function<T, R> {
-
   /**
    * Gets the result of applying this function to {@code input}.
    *

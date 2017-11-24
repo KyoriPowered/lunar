@@ -30,7 +30,6 @@ import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 
 public class OptionalsTest {
-
   @Test
   public void testFirst() {
     final Optional<String> expected = Optional.of("meow");

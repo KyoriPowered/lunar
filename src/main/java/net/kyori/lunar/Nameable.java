@@ -23,18 +23,17 @@
  */
 package net.kyori.lunar;
 
-import javax.annotation.Nonnull;
+import net.kyori.blizzard.NonNull;
 
 /**
  * Something with a name.
  */
 public interface Nameable {
-
   /**
    * Gets the name.
    *
    * @return the name
    */
-  @Nonnull
+  @NonNull
   String name();
 }

@@ -35,7 +35,6 @@ import java.util.function.Supplier;
  */
 @FunctionalInterface
 public interface ThrowingSupplier<T, E extends Throwable> extends Supplier<T> {
-
   /**
    * Gets a result.
    *

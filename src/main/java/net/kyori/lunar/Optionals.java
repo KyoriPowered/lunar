@@ -23,16 +23,15 @@
  */
 package net.kyori.lunar;
 
+import net.kyori.blizzard.NonNull;
+
 import java.util.Arrays;
 import java.util.Optional;
-
-import javax.annotation.Nonnull;
 
 /**
  * A collection of utilities for working with {@link Optional}.
  */
 public final class Optionals {
-
   private Optionals() {
   }
 
@@ -43,7 +42,7 @@ public final class Optionals {
    * @param <T> the type
    * @return an optional
    */
-  @Nonnull
+  @NonNull
   public static <T> Optional<T> first(final Optional<T>... optionals) {
     return Arrays.stream(optionals)
       .filter(Optional::isPresent)

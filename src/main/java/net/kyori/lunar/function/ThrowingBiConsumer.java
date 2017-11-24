@@ -36,7 +36,6 @@ import java.util.function.BiConsumer;
  */
 @FunctionalInterface
 public interface ThrowingBiConsumer<T, U, E extends Throwable> extends BiConsumer<T, U> {
-
   /**
    * Performs this operation on the given arguments.
    *

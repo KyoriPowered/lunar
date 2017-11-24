@@ -30,7 +30,6 @@ import java.util.function.Consumer;
  */
 @FunctionalInterface
 public interface BooleanConsumer {
-
   /**
    * Performs this operation on the given argument.
    *

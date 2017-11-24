@@ -35,7 +35,6 @@ import java.util.function.Consumer;
  */
 @FunctionalInterface
 public interface PropagatingConsumer<T, E extends Throwable> extends Consumer<T> {
-
   /**
    * Performs this operation on the given argument.
    *

@@ -32,7 +32,6 @@ import net.kyori.lunar.exception.Exceptions;
  */
 @FunctionalInterface
 public interface ThrowingRunnable<E extends Throwable> extends Runnable {
-
   /**
    * Run.
    *

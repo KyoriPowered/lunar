@@ -24,18 +24,16 @@
 package net.kyori.lunar.concurrent;
 
 import com.google.common.util.concurrent.MoreExecutors;
+import net.kyori.blizzard.NonNull;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import javax.annotation.Nonnull;
 
 /**
  * @see Executors
  * @see MoreExecutors
  */
 public final class EvenMoreExecutors {
-
   private EvenMoreExecutors() {
   }
 
@@ -61,7 +59,7 @@ public final class EvenMoreExecutors {
       this.executorService = executorService;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public ExecutorService executorService() {
       return this.executorService;

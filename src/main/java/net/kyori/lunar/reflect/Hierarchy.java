@@ -23,19 +23,18 @@
  */
 package net.kyori.lunar.reflect;
 
+import net.kyori.blizzard.NonNull;
+import net.kyori.blizzard.Nullable;
+
 import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.function.Predicate;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 /**
  * A collection of utilities for working with class hierarchy.
  */
 public final class Hierarchy {
-
   private Hierarchy() {
   }
 
@@ -50,7 +49,7 @@ public final class Hierarchy {
    */
   // thanks, kenzie
   @Nullable
-  public static <T> Class<? extends T> find(@Nonnull final Class<? extends T> first, @Nonnull final Class<T> type, @Nonnull final Predicate<Class<? extends T>> predicate) {
+  public static <T> Class<? extends T> find(@NonNull final Class<? extends T> first, @NonNull final Class<T> type, @NonNull final Predicate<Class<? extends T>> predicate) {
     final Deque<Class<?>> classes = new LinkedList<>();
     classes.add(first);
 

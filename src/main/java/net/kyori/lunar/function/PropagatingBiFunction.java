@@ -37,7 +37,6 @@ import java.util.function.BiFunction;
  */
 @FunctionalInterface
 public interface PropagatingBiFunction<T, U, R, E extends Throwable> extends BiFunction<T, U, R> {
-
   /**
    * Gets the result of applying this function to {@code input}.
    *

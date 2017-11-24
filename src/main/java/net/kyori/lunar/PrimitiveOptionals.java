@@ -23,12 +23,12 @@
  */
 package net.kyori.lunar;
 
+import net.kyori.blizzard.NonNull;
+
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleUnaryOperator;
-
-import javax.annotation.Nonnull;
 
 import static java.util.Objects.requireNonNull;
 
@@ -36,7 +36,6 @@ import static java.util.Objects.requireNonNull;
  * A collection of utilities for working with primitive optionals.
  */
 public final class PrimitiveOptionals {
-
   private PrimitiveOptionals() {
   }
 
@@ -48,8 +47,8 @@ public final class PrimitiveOptionals {
    * @param operator the operator
    * @return an optional
    */
-  @Nonnull
-  public static OptionalDouble map(@Nonnull final OptionalDouble optional, @Nonnull final DoubleUnaryOperator operator) {
+  @NonNull
+  public static OptionalDouble map(@NonNull final OptionalDouble optional, @NonNull final DoubleUnaryOperator operator) {
     requireNonNull(operator, "operator");
     return optional.isPresent() ? OptionalDouble.of(operator.applyAsDouble(optional.getAsDouble())) : OptionalDouble.empty();
   }
@@ -62,8 +61,8 @@ public final class PrimitiveOptionals {
    * @param function the function
    * @return an optional
    */
-  @Nonnull
-  public static OptionalInt mapToInt(@Nonnull final OptionalDouble optional, @Nonnull final DoubleToIntFunction function) {
+  @NonNull
+  public static OptionalInt mapToInt(@NonNull final OptionalDouble optional, @NonNull final DoubleToIntFunction function) {
     requireNonNull(function, "function");
     return optional.isPresent() ? OptionalInt.of(function.applyAsInt(optional.getAsDouble())) : OptionalInt.empty();
   }

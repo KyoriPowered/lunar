@@ -28,7 +28,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.RunnableFuture;
 
 final class RunnableCompletableFuture<T> extends CompletableFuture<T> implements RunnableFuture<T> {
-
   private final Callable<T> callable;
 
   RunnableCompletableFuture(final Callable<T> callable) {

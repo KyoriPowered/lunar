@@ -23,6 +23,9 @@
  */
 package net.kyori.lunar.concurrent;
 
+import net.kyori.blizzard.NonNull;
+import net.kyori.blizzard.Nullable;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -32,14 +35,10 @@ import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 /**
  * An executor service that returns {@link CompletableFuture} instances.
  */
 public interface CompletableExecutorService extends ExecutorService {
-
   /**
    * {@inheritDoc}
    *
@@ -49,9 +48,9 @@ public interface CompletableExecutorService extends ExecutorService {
    * @throws NullPointerException if the task is null
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    */
-  @Nonnull
+  @NonNull
   @Override
-  <T> CompletableFuture<T> submit(@Nonnull final Callable<T> task);
+  <T> CompletableFuture<T> submit(@NonNull final Callable<T> task);
 
   /**
    * {@inheritDoc}
@@ -63,9 +62,9 @@ public interface CompletableExecutorService extends ExecutorService {
    * @throws NullPointerException if the task is null
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    */
-  @Nonnull
+  @NonNull
   @Override
-  <T> CompletableFuture<T> submit(@Nonnull final Runnable task, @Nullable final T result);
+  <T> CompletableFuture<T> submit(@NonNull final Runnable task, @Nullable final T result);
 
   /**
    * {@inheritDoc}
@@ -75,9 +74,9 @@ public interface CompletableExecutorService extends ExecutorService {
    * @throws NullPointerException if the task is null
    * @throws RejectedExecutionException {@inheritDoc}
    */
-  @Nonnull
+  @NonNull
   @Override
-  CompletableFuture<?> submit(@Nonnull final Runnable task);
+  CompletableFuture<?> submit(@NonNull final Runnable task);
 
   /**
    * {@inheritDoc}
@@ -88,9 +87,9 @@ public interface CompletableExecutorService extends ExecutorService {
    *     order as produced by the iterator for the given task list, each of which has completed
    * @throws InterruptedException if interrupted while waiting, in which case unfinished tasks are cancelled
    */
-  @Nonnull
+  @NonNull
   @Override
-  <T> List<Future<T>> invokeAll(@Nonnull final Collection<? extends Callable<T>> tasks) throws InterruptedException;
+  <T> List<Future<T>> invokeAll(@NonNull final Collection<? extends Callable<T>> tasks) throws InterruptedException;
 
   /**
    * {@inheritDoc}
@@ -105,7 +104,7 @@ public interface CompletableExecutorService extends ExecutorService {
    *     completed
    * @throws InterruptedException if interrupted while waiting, in which case unfinished tasks are cancelled
    */
-  @Nonnull
+  @NonNull
   @Override
-  <T> List<Future<T>> invokeAll(@Nonnull final Collection<? extends Callable<T>> tasks, final long timeout, @Nonnull final TimeUnit unit) throws InterruptedException;
+  <T> List<Future<T>> invokeAll(@NonNull final Collection<? extends Callable<T>> tasks, final long timeout, @NonNull final TimeUnit unit) throws InterruptedException;
 }

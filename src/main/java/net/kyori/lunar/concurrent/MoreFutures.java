@@ -24,16 +24,14 @@
 package net.kyori.lunar.concurrent;
 
 import com.google.common.util.concurrent.Futures;
+import net.kyori.blizzard.NonNull;
 
 import java.util.concurrent.CompletableFuture;
-
-import javax.annotation.Nonnull;
 
 /**
  * @see Futures
  */
 public final class MoreFutures {
-
   private MoreFutures() {
   }
 
@@ -44,8 +42,8 @@ public final class MoreFutures {
    * @param <T> the type
    * @return an exceptionally completed completable future
    */
-  @Nonnull
-  public static <T> CompletableFuture<T> immediateFailedFuture(@Nonnull final Throwable ex) {
+  @NonNull
+  public static <T> CompletableFuture<T> immediateFailedFuture(@NonNull final Throwable ex) {
     final CompletableFuture<T> future = new CompletableFuture<>();
     future.completeExceptionally(ex);
     return future;

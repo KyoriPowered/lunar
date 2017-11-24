@@ -31,7 +31,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class HierarchyTest {
-
   @Test
   public void testFind() {
     final List<Class<?>> classes = Arrays.asList(Thing1.class, ThingA.class);

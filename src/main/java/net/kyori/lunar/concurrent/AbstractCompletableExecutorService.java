@@ -23,42 +23,41 @@
  */
 package net.kyori.lunar.concurrent;
 
+import net.kyori.blizzard.NonNull;
+import net.kyori.blizzard.Nullable;
+
 import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RunnableFuture;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 public abstract class AbstractCompletableExecutorService extends AbstractExecutorService implements CompletableExecutorService {
-
-  @Nonnull
+  @NonNull
   @Override
-  public CompletableFuture<?> submit(@Nonnull final Runnable task) {
+  public CompletableFuture<?> submit(@NonNull final Runnable task) {
     return (CompletableFuture<?>) super.submit(task);
   }
 
-  @Nonnull
+  @NonNull
   @Override
-  public <T> CompletableFuture<T> submit(@Nonnull final Runnable task, @Nullable final T result) {
+  public <T> CompletableFuture<T> submit(@NonNull final Runnable task, @Nullable final T result) {
     return (CompletableFuture<T>) super.submit(task, result);
   }
 
-  @Nonnull
+  @NonNull
   @Override
-  public <T> CompletableFuture<T> submit(@Nonnull final Callable<T> task) {
+  public <T> CompletableFuture<T> submit(@NonNull final Callable<T> task) {
     return (CompletableFuture<T>) super.submit(task);
   }
 
   @Override
-  protected <T> RunnableFuture<T> newTaskFor(@Nonnull final Runnable runnable, @Nullable final T value) {
+  protected <T> RunnableFuture<T> newTaskFor(@NonNull final Runnable runnable, @Nullable final T value) {
     return new RunnableCompletableFuture<>(Executors.callable(runnable, value));
   }
 
   @Override
-  protected <T> RunnableFuture<T> newTaskFor(@Nonnull final Callable<T> callable) {
+  protected <T> RunnableFuture<T> newTaskFor(@NonNull final Callable<T> callable) {
     return new RunnableCompletableFuture<>(callable);
   }
 }
