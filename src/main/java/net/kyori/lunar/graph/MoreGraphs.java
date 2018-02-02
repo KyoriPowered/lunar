@@ -50,7 +50,8 @@ public final class MoreGraphs {
    * @param graph the graph to be sorted
    * @param <T> the node type
    * @return the sorted list
-   * @throws IllegalArgumentException if the graph is not directed, allows self loops, or has cycles
+   * @throws CyclePresentException if the graph has cycles
+   * @throws IllegalArgumentException if the graph is not directed or allows self loops
    */
   @NonNull
   public static <T> List<T> topologicalSort(@NonNull final Graph<T> graph) {
@@ -66,7 +67,8 @@ public final class MoreGraphs {
    * @param comparator the comparator
    * @param <T> the node type
    * @return the sorted list
-   * @throws IllegalArgumentException if the graph is not directed, allows self loops, or has cycles
+   * @throws CyclePresentException if the graph has cycles
+   * @throws IllegalArgumentException if the graph is not directed or allows self loops
    */
   @NonNull
   public static <T> List<T> orderedTopologicalSort(@NonNull final Graph<T> graph, @NonNull final Comparator<T> comparator) {
@@ -81,7 +83,8 @@ public final class MoreGraphs {
    * @param graph the graph to be sorted
    * @param <T> the node type, implementing {@link Comparable}
    * @return the sorted list
-   * @throws IllegalArgumentException if the graph is not directed, allows self loops, or has cycles
+   * @throws CyclePresentException if the graph has cycles
+   * @throws IllegalArgumentException if the graph is not directed or allows self loops
    */
   @NonNull
   public static <T extends Comparable<? super T>> List<T> orderedTopologicalSort(@NonNull final Graph<T> graph) {
@@ -95,7 +98,8 @@ public final class MoreGraphs {
    * @param type the sort type
    * @param <T> the node type
    * @return the sorted list
-   * @throws IllegalArgumentException if the graph is not directed, allows self loops, or has cycles
+   * @throws CyclePresentException if the graph has cycles
+   * @throws IllegalArgumentException if the graph is not directed or allows self loops
    */
   @NonNull
   private static <T> List<T> topologicalSort(@NonNull final Graph<T> graph, @NonNull final SortType<T> type) {
@@ -136,7 +140,7 @@ public final class MoreGraphs {
     if(!requiredCounts.isEmpty()) {
       final StronglyConnectedComponentAnalyzer<T> analyzer = new StronglyConnectedComponentAnalyzer<>(graph);
       analyzer.analyze();
-      throw new IllegalArgumentException("Graph (" + graph + ") has cycle(s): " + analyzer.renderCycles());
+      throw new CyclePresentException("Graph (" + graph + ") has cycle(s): " + analyzer.renderCycles(), analyzer.getComponents());
     }
     return results;
   }
