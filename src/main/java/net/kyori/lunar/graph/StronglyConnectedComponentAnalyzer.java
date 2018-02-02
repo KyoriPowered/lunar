@@ -62,7 +62,7 @@ final class StronglyConnectedComponentAnalyzer<T> {
   void analyze() {
     for(final T node : this.graph.nodes()) {
       if(!this.ids.containsKey(node)) {
-        dfs(node);
+        this.dfs(node);
       }
     }
   }
@@ -74,7 +74,7 @@ final class StronglyConnectedComponentAnalyzer<T> {
   }
 
   @NonNull
-  String printCycles() {
+  String renderCycles() {
     final StringBuilder reporter = new StringBuilder();
     for(final Collection<T> component : this.components) {
       if(component.size() > 1) {
@@ -106,7 +106,7 @@ final class StronglyConnectedComponentAnalyzer<T> {
       if(this.ids.containsKey(node)) {
         this.low[self] = Math.min(this.ids.get(node), this.low[self]);
       } else {
-        dfs(node);
+        this.dfs(node);
         this.low[self] = Math.min(this.low[this.ids.get(node)], this.low[self]);
       }
     }

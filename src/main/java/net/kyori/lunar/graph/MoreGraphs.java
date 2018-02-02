@@ -90,9 +90,15 @@ public final class MoreGraphs {
 
   /**
    * Actual content of the topological sort. This is a breadth-first search based approach.
+   *
+   * @param graph the graph to be sorted
+   * @param type the sort type
+   * @param <T> the node type
+   * @return the sorted list
+   * @throws IllegalArgumentException if the graph is not directed, allows self loops, or has cycles
    */
   @NonNull
-  private static <T> List<T> topologicalSort(@NonNull final Graph<T> graph, @NonNull final SortType<T> sortType) {
+  private static <T> List<T> topologicalSort(@NonNull final Graph<T> graph, @NonNull final SortType<T> type) {
     checkArgument(graph.isDirected(), "the graph must be directed");
     checkArgument(!graph.allowsSelfLoops(), "the graph cannot allow self loops");
 
@@ -104,7 +110,7 @@ public final class MoreGraphs {
       }
     }
 
-    final Queue<T> processing = sortType.makeQueue();
+    final Queue<T> processing = type.createQueue();
     final List<T> results = new ArrayList<>();
 
     for(final T node : graph.nodes()) {
@@ -128,9 +134,9 @@ public final class MoreGraphs {
     }
 
     if(!requiredCounts.isEmpty()) {
-      StronglyConnectedComponentAnalyzer<T> analyzer = new StronglyConnectedComponentAnalyzer<>(graph);
+      final StronglyConnectedComponentAnalyzer<T> analyzer = new StronglyConnectedComponentAnalyzer<>(graph);
       analyzer.analyze();
-      throw new IllegalArgumentException("Graph (" + graph + ") has cycle(s): " + analyzer.printCycles());
+      throw new IllegalArgumentException("Graph (" + graph + ") has cycle(s): " + analyzer.renderCycles());
     }
     return results;
   }

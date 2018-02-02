@@ -32,13 +32,13 @@ import java.util.Queue;
 final class ComparatorSortType<T> implements SortType<T> {
   private final Comparator<? super T> comparator;
 
-  ComparatorSortType(Comparator<? super T> comparator) {
+  ComparatorSortType(final Comparator<? super T> comparator) {
     this.comparator = comparator;
   }
 
   @Override
   @NonNull
-  public Queue<T> makeQueue() {
+  public Queue<T> createQueue() {
     return new PriorityQueue<>(this.comparator);
   }
 }

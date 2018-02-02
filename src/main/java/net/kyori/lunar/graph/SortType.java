@@ -32,21 +32,46 @@ import java.util.Queue;
 /**
  * The type of sorts performed by the topological sorter.
  * <p>This is not an enum because of generics.</p>
+ *
+ * @param <T> the node type of graphs
  */
 @FunctionalInterface
 interface SortType<T> {
-  @NonNull
-  Queue<T> makeQueue();
-
+  /**
+   * The sort type that just collects nodes from the graph randomly.
+   */
   SortType<?> RANDOM = ArrayDeque::new;
+  /**
+   * The sort type that collects nodes from the graph based on natural ordering.
+   */
   SortType<? extends Comparable<?>> COMPARABLE = PriorityQueue::new;
 
+  /**
+   * Create a queue for node collection for the resulting list.
+   *
+   * @return the new queue
+   */
+  @NonNull
+  Queue<T> createQueue();
+
+  /**
+   * Gets the type-safe instance of the random sort type.
+   *
+   * @param <T> the node type
+   * @return the random sort type
+   */
   @SuppressWarnings("unchecked")
   @NonNull
   static <T> SortType<T> random() {
     return (SortType<T>) RANDOM;
   }
 
+  /**
+   * Gets the type-safe instance of the comparable sort type.
+   *
+   * @param <T> the node type
+   * @return the comparable sort type
+   */
   @SuppressWarnings("unchecked")
   @NonNull
   static <T extends Comparable<?>> SortType<T> comparable() {
