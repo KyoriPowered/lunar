@@ -21,33 +21,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar;
+package net.kyori.lunar.graph;
 
 import net.kyori.blizzard.NonNull;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.ArrayDeque;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
- * A collection of utilities for working with {@link Optional}.
+ * The type of sorts performed by the topological sorter.
+ * <p>This is not an enum because of generics.</p>
+ *
+ * @param <T> the node type of graphs
  */
-public final class Optionals {
-  private Optionals() {
+@FunctionalInterface
+interface SortType<T> {
+  /**
+   * The sort type that just collects nodes from the graph randomly.
+   */
+  SortType<?> RANDOM = ArrayDeque::new;
+  /**
+   * The sort type that collects nodes from the graph based on natural ordering.
+   */
+  SortType<? extends Comparable<?>> COMPARABLE = PriorityQueue::new;
+
+  /**
+   * Create a queue for node collection for the resulting list.
+   *
+   * @return the new queue
+   */
+  @NonNull
+  Queue<T> createQueue();
+
+  /**
+   * Gets the type-safe instance of the random sort type.
+   *
+   * @param <T> the node type
+   * @return the random sort type
+   */
+  @NonNull
+  @SuppressWarnings("unchecked")
+  static <T> SortType<T> random() {
+    return (SortType<T>) RANDOM;
   }
 
   /**
-   * Gets the first optional with a present value.
+   * Gets the type-safe instance of the comparable sort type.
    *
-   * @param optionals the optionals
-   * @param <T> the type
-   * @return an optional
+   * @param <T> the node type
+   * @return the comparable sort type
    */
   @NonNull
-  @SafeVarargs
-  public static <T> Optional<T> first(final Optional<T>... optionals) {
-    return Arrays.stream(optionals)
-      .filter(Optional::isPresent)
-      .findFirst()
-      .orElse(Optional.empty());
+  @SuppressWarnings("unchecked")
+  static <T extends Comparable<?>> SortType<T> comparable() {
+    return (SortType<T>) COMPARABLE;
   }
 }

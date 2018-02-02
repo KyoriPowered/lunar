@@ -21,33 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar;
+package net.kyori.lunar.graph;
 
 import net.kyori.blizzard.NonNull;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
-/**
- * A collection of utilities for working with {@link Optional}.
- */
-public final class Optionals {
-  private Optionals() {
+final class ComparatorSortType<T> implements SortType<T> {
+  private final Comparator<? super T> comparator;
+
+  ComparatorSortType(final Comparator<? super T> comparator) {
+    this.comparator = comparator;
   }
 
-  /**
-   * Gets the first optional with a present value.
-   *
-   * @param optionals the optionals
-   * @param <T> the type
-   * @return an optional
-   */
+  @Override
   @NonNull
-  @SafeVarargs
-  public static <T> Optional<T> first(final Optional<T>... optionals) {
-    return Arrays.stream(optionals)
-      .filter(Optional::isPresent)
-      .findFirst()
-      .orElse(Optional.empty());
+  public Queue<T> createQueue() {
+    return new PriorityQueue<>(this.comparator);
   }
 }
