@@ -48,9 +48,9 @@ final class StronglyConnectedComponentAnalyzer<T> {
   @NonNull private final Map<T, Integer> ids = new HashMap<>();
   @NonNull private final Deque<T> stack = new ArrayDeque<>();
   @NonNull private final Collection<Collection<T>> components = new ArrayList<>();
-  @NonNegative private int currentId = 0;
   @NonNull private final Graph<T> graph;
   @NonNull private final int[] low;
+  @NonNegative private int currentId = 0;
 
   @VisibleForTesting
   StronglyConnectedComponentAnalyzer(@NonNull final Graph<T> graph) {

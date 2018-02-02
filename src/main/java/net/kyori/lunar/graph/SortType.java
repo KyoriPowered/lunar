@@ -60,8 +60,8 @@ interface SortType<T> {
    * @param <T> the node type
    * @return the random sort type
    */
-  @SuppressWarnings("unchecked")
   @NonNull
+  @SuppressWarnings("unchecked")
   static <T> SortType<T> random() {
     return (SortType<T>) RANDOM;
   }
@@ -72,8 +72,8 @@ interface SortType<T> {
    * @param <T> the node type
    * @return the comparable sort type
    */
-  @SuppressWarnings("unchecked")
   @NonNull
+  @SuppressWarnings("unchecked")
   static <T extends Comparable<?>> SortType<T> comparable() {
     return (SortType<T>) COMPARABLE;
   }
