@@ -46,6 +46,7 @@ public class StronglyConnectedComponentAnalyzerTest {
     // one strongly connected component {1, 2, 3}
   }
 
+  @Test
   public void testTwoComponents() {
     final MutableGraph<Integer> graph = GraphBuilder.directed().build();
     graph.addNode(1);
