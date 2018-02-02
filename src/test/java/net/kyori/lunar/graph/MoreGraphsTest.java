@@ -49,7 +49,7 @@ public class MoreGraphsTest {
     assertEquals(3, results.get(2).intValue());
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = CyclePresentException.class)
   public void testTopologicalSortWithCircle() {
     final MutableGraph<Integer> graph = GraphBuilder.directed().build();
     graph.addNode(1);
