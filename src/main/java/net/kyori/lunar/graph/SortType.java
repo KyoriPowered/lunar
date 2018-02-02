@@ -21,33 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar;
+package net.kyori.lunar.graph;
 
 import net.kyori.blizzard.NonNull;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.ArrayDeque;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
- * A collection of utilities for working with {@link Optional}.
+ * The type of sorts performed by the topological sorter.
+ * <p>This is not an enum because of generics.</p>
  */
-public final class Optionals {
-  private Optionals() {
+@FunctionalInterface
+interface SortType<T> {
+  @NonNull
+  Queue<T> makeQueue();
+
+  SortType<?> RANDOM = ArrayDeque::new;
+  SortType<? extends Comparable<?>> COMPARABLE = PriorityQueue::new;
+
+  @SuppressWarnings("unchecked")
+  @NonNull
+  static <T> SortType<T> random() {
+    return (SortType<T>) RANDOM;
   }
 
-  /**
-   * Gets the first optional with a present value.
-   *
-   * @param optionals the optionals
-   * @param <T> the type
-   * @return an optional
-   */
+  @SuppressWarnings("unchecked")
   @NonNull
-  @SafeVarargs
-  public static <T> Optional<T> first(final Optional<T>... optionals) {
-    return Arrays.stream(optionals)
-      .filter(Optional::isPresent)
-      .findFirst()
-      .orElse(Optional.empty());
+  static <T extends Comparable<?>> SortType<T> comparable() {
+    return (SortType<T>) COMPARABLE;
   }
 }
