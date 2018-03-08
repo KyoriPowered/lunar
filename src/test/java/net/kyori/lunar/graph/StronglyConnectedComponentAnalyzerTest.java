@@ -25,13 +25,13 @@ package net.kyori.lunar.graph;
 
 import com.google.common.graph.GraphBuilder;
 import com.google.common.graph.MutableGraph;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StronglyConnectedComponentAnalyzerTest {
+class StronglyConnectedComponentAnalyzerTest {
   @Test
-  public void testOneComponents() {
+  void testOneComponents() {
     final MutableGraph<Integer> graph = GraphBuilder.directed().build();
     graph.addNode(1);
     graph.addNode(2);
@@ -47,7 +47,7 @@ public class StronglyConnectedComponentAnalyzerTest {
   }
 
   @Test
-  public void testTwoComponents() {
+  void testTwoComponents() {
     final MutableGraph<Integer> graph = GraphBuilder.directed().build();
     graph.addNode(1);
     graph.addNode(2);

@@ -23,15 +23,15 @@
  */
 package net.kyori.lunar;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OptionalsTest {
+class OptionalsTest {
   @Test
-  public void testFirst() {
+  void testFirst() {
     final Optional<String> expected = Optional.of("meow");
     final Optional<String> result = Optionals.first(
       Optional.empty(),
