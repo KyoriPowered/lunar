@@ -23,21 +23,21 @@
  */
 package net.kyori.lunar;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.OptionalDouble;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PrimitiveOptionalsTest {
+class PrimitiveOptionalsTest {
   @Test
-  public void testMap() {
+  void testMap() {
     assertTrue(PrimitiveOptionals.map(OptionalDouble.of(10.283), value -> value * 2).getAsDouble() == 20.566);
   }
 
   @Test
-  public void testMapToInt() {
+  void testMapToInt() {
     assertEquals(10, PrimitiveOptionals.mapToInt(OptionalDouble.of(10.283), value -> (int) value).getAsInt());
   }
 }

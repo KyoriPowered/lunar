@@ -25,16 +25,17 @@ package net.kyori.lunar.graph;
 
 import com.google.common.graph.GraphBuilder;
 import com.google.common.graph.MutableGraph;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MoreGraphsTest {
+class MoreGraphsTest {
   @Test
-  public void testTopologicalSort() {
+  void testTopologicalSort() {
     final MutableGraph<Integer> graph = GraphBuilder.directed().build();
     graph.addNode(1);
     graph.addNode(2);
@@ -49,24 +50,26 @@ public class MoreGraphsTest {
     assertEquals(3, results.get(2).intValue());
   }
 
-  @Test(expected = CyclePresentException.class)
-  public void testTopologicalSortWithCircle() {
-    final MutableGraph<Integer> graph = GraphBuilder.directed().build();
-    graph.addNode(1);
-    graph.addNode(2);
-    graph.addNode(3);
-    graph.putEdge(1, 2);
-    graph.putEdge(2, 3);
-    graph.putEdge(3, 1);
+  @Test
+  void testTopologicalSortWithCircle() {
+    assertThrows(CyclePresentException.class, () -> {
+      final MutableGraph<Integer> graph = GraphBuilder.directed().build();
+      graph.addNode(1);
+      graph.addNode(2);
+      graph.addNode(3);
+      graph.putEdge(1, 2);
+      graph.putEdge(2, 3);
+      graph.putEdge(3, 1);
 
-    final List<Integer> results = MoreGraphs.topologicalSort(graph);
-    assertEquals(1, results.get(0).intValue());
-    assertEquals(2, results.get(1).intValue());
-    assertEquals(3, results.get(2).intValue());
+      final List<Integer> results = MoreGraphs.topologicalSort(graph);
+      assertEquals(1, results.get(0).intValue());
+      assertEquals(2, results.get(1).intValue());
+      assertEquals(3, results.get(2).intValue());
+    });
   }
 
   @Test
-  public void testTopologicalSortNaturalOrder() {
+  void testTopologicalSortNaturalOrder() {
     final MutableGraph<Integer> graph = GraphBuilder.directed().build();
     graph.addNode(1);
     graph.addNode(2);
@@ -87,7 +90,7 @@ public class MoreGraphsTest {
   }
 
   @Test
-  public void testTopologicalSortComparator() {
+  void testTopologicalSortComparator() {
     final MutableGraph<Integer> graph = GraphBuilder.directed().build();
     graph.addNode(1);
     graph.addNode(2);

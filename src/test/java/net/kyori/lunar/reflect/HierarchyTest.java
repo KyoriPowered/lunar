@@ -23,16 +23,16 @@
  */
 package net.kyori.lunar.reflect;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class HierarchyTest {
+class HierarchyTest {
   @Test
-  public void testFind() {
+  void testFind() {
     final List<Class<?>> classes = Arrays.asList(Thing1.class, ThingA.class);
     assertEquals(ThingA.class, Hierarchy.find(ThingB.class, Thing1.class, classes::contains));
   }

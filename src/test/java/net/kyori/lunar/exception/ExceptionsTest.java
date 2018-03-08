@@ -23,7 +23,7 @@
  */
 package net.kyori.lunar.exception;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiConsumer;
@@ -32,12 +32,12 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
 
-public class ExceptionsTest {
+class ExceptionsTest {
   @Test
-  public void testRethrowConsumer() {
+  void testRethrowConsumer() {
     try {
       this.consumer(Exceptions.rethrowConsumer(input -> { throw new TestException(); }));
     } catch(final TestException e) { return;
@@ -46,7 +46,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testUnwrappingRethrowConsumer() {
+  void testUnwrappingRethrowConsumer() {
     try {
       this.consumer(Exceptions.unwrappingRethrowConsumer(input -> { throw new InvocationTargetException(new TestException()); }));
     } catch(final TestException e) { return;
@@ -55,7 +55,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testRethrowBiConsumer() {
+  void testRethrowBiConsumer() {
     try {
       this.consumer(Exceptions.rethrowConsumer((a, b) -> { throw new TestException(); }));
     } catch(final TestException e) { return;
@@ -64,7 +64,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testUnwrappingRethrowBiConsumer() {
+  void testUnwrappingRethrowBiConsumer() {
     try {
       this.consumer(Exceptions.unwrappingRethrowConsumer((a, b) -> { throw new InvocationTargetException(new TestException()); }));
     } catch(final TestException e) { return;
@@ -73,7 +73,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testRethrowFunction() {
+  void testRethrowFunction() {
     try {
       this.function(Exceptions.rethrowFunction(input -> { throw new TestException(); }));
     } catch(final TestException e) { return;
@@ -82,7 +82,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testUnwrappingRethrowFunction() {
+  void testUnwrappingRethrowFunction() {
     try {
       this.function(Exceptions.unwrappingRethrowFunction(input -> { throw new InvocationTargetException(new TestException()); }));
     } catch(final TestException e) { return;
@@ -91,7 +91,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testRethrowBiFunction() {
+  void testRethrowBiFunction() {
     try {
       this.function(Exceptions.rethrowFunction((a, b) -> { throw new TestException(); }));
     } catch(final TestException e) { return;
@@ -100,7 +100,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testUnwrappingRethrowBiFunction() {
+  void testUnwrappingRethrowBiFunction() {
     try {
       this.function(Exceptions.unwrappingRethrowFunction((a, b) -> { throw new InvocationTargetException(new TestException()); }));
     } catch(final TestException e) { return;
@@ -109,7 +109,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testRethrowSupplier() {
+  void testRethrowSupplier() {
     try {
       this.supplier(Exceptions.rethrowSupplier(() -> { throw new TestException(); } ));
     } catch(final TestException e) { return;
@@ -118,7 +118,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testUnwrappingRethrowSupplier() {
+  void testUnwrappingRethrowSupplier() {
     try {
       this.supplier(Exceptions.unwrappingRethrowSupplier(() -> { throw new InvocationTargetException(new TestException()); }));
     } catch(final TestException e) { return;
@@ -127,7 +127,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testPropagate() {
+  void testPropagate() {
     final TestException te = new TestException();
     try {
       throw Exceptions.propagate(te);
@@ -137,7 +137,7 @@ public class ExceptionsTest {
   }
 
   @Test
-  public void testUnwrap() {
+  void testUnwrap() {
     final TestException te = new TestException();
     final InvocationTargetException ite = new InvocationTargetException(te);
     assertSame(te, Exceptions.unwrap(ite));
