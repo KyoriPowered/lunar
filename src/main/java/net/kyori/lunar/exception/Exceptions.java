@@ -30,6 +30,7 @@ import net.kyori.lunar.function.ThrowingBiConsumer;
 import net.kyori.lunar.function.ThrowingBiFunction;
 import net.kyori.lunar.function.ThrowingConsumer;
 import net.kyori.lunar.function.ThrowingFunction;
+import net.kyori.lunar.function.ThrowingRunnable;
 import net.kyori.lunar.function.ThrowingSupplier;
 
 import java.lang.reflect.InvocationTargetException;
@@ -180,6 +181,16 @@ public final class Exceptions {
         throw rethrow(unwrap(t));
       }
     };
+  }
+
+  /**
+   * Runs a throwable and, sneakily, re-throws any exceptions it encounters.
+   *
+   * @param runnable the runnable
+   * @param <E> the exception type
+   */
+  public static <E extends Throwable> void rethrowRunnable(@NonNull final ThrowingRunnable<E> runnable) {
+    runnable.run();
   }
 
   /**
