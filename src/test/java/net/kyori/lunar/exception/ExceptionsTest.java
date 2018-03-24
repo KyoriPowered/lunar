@@ -57,7 +57,7 @@ class ExceptionsTest {
   @Test
   void testRethrowBiConsumer() {
     try {
-      this.consumer(Exceptions.rethrowConsumer((a, b) -> { throw new TestException(); }));
+      this.consumer(Exceptions.rethrowBiConsumer((a, b) -> { throw new TestException(); }));
     } catch(final TestException e) { return;
     } catch(final Exception ignored) {}
     fail("should have thrown TestException");
@@ -66,7 +66,7 @@ class ExceptionsTest {
   @Test
   void testUnwrappingRethrowBiConsumer() {
     try {
-      this.consumer(Exceptions.unwrappingRethrowConsumer((a, b) -> { throw new InvocationTargetException(new TestException()); }));
+      this.consumer(Exceptions.unwrappingRethrowBiConsumer((a, b) -> { throw new InvocationTargetException(new TestException()); }));
     } catch(final TestException e) { return;
     } catch(final Exception ignored) {}
     fail("should have thrown TestException");
@@ -93,7 +93,7 @@ class ExceptionsTest {
   @Test
   void testRethrowBiFunction() {
     try {
-      this.function(Exceptions.rethrowFunction((a, b) -> { throw new TestException(); }));
+      this.function(Exceptions.rethrowBiFunction((a, b) -> { throw new TestException(); }));
     } catch(final TestException e) { return;
     } catch(final Exception ignored) {}
     fail("should have thrown TestException");
@@ -102,7 +102,7 @@ class ExceptionsTest {
   @Test
   void testUnwrappingRethrowBiFunction() {
     try {
-      this.function(Exceptions.unwrappingRethrowFunction((a, b) -> { throw new InvocationTargetException(new TestException()); }));
+      this.function(Exceptions.unwrappingRethrowBiFunction((a, b) -> { throw new InvocationTargetException(new TestException()); }));
     } catch(final TestException e) { return;
     } catch(final Exception ignored) {}
     fail("should have thrown TestException");
