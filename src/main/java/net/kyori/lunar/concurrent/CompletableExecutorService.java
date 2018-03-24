@@ -23,8 +23,8 @@
  */
 package net.kyori.lunar.concurrent;
 
-import net.kyori.blizzard.NonNull;
-import net.kyori.blizzard.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Collection;
 import java.util.List;

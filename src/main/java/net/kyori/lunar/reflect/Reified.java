@@ -24,7 +24,7 @@
 package net.kyori.lunar.reflect;
 
 import com.google.common.reflect.TypeToken;
-import net.kyori.blizzard.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * A type that knows its own type parameter.

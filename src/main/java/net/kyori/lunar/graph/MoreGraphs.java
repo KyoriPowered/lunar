@@ -24,7 +24,7 @@
 package net.kyori.lunar.graph;
 
 import com.google.common.graph.Graph;
-import net.kyori.blizzard.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.Comparator;

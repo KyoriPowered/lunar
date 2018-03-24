@@ -24,7 +24,7 @@
 package net.kyori.lunar.concurrent;
 
 import com.google.common.util.concurrent.MoreExecutors;
-import net.kyori.blizzard.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
