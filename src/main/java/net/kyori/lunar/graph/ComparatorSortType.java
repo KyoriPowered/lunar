@@ -23,7 +23,7 @@
  */
 package net.kyori.lunar.graph;
 
-import net.kyori.blizzard.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

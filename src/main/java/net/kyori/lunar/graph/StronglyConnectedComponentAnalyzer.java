@@ -25,8 +25,8 @@ package net.kyori.lunar.graph;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.graph.Graph;
-import net.kyori.blizzard.NonNegative;
-import net.kyori.blizzard.NonNull;
+import org.checkerframework.checker.index.qual.NonNegative;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

@@ -23,7 +23,7 @@
  */
 package net.kyori.lunar;
 
-import net.kyori.blizzard.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Something with a name.

@@ -24,8 +24,6 @@
 package net.kyori.lunar.exception;
 
 import com.google.common.base.Throwables;
-import net.kyori.blizzard.NonNull;
-import net.kyori.blizzard.Nullable;
 import net.kyori.lunar.function.ThrowingBiConsumer;
 import net.kyori.lunar.function.ThrowingBiFunction;
 import net.kyori.lunar.function.ThrowingConsumer;
@@ -33,6 +31,8 @@ import net.kyori.lunar.function.ThrowingFunction;
 import net.kyori.lunar.function.ThrowingPredicate;
 import net.kyori.lunar.function.ThrowingRunnable;
 import net.kyori.lunar.function.ThrowingSupplier;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.BiConsumer;

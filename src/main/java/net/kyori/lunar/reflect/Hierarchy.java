@@ -23,8 +23,8 @@
  */
 package net.kyori.lunar.reflect;
 
-import net.kyori.blizzard.NonNull;
-import net.kyori.blizzard.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Collections;
 import java.util.Deque;
