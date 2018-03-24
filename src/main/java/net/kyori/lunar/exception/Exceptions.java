@@ -30,6 +30,7 @@ import net.kyori.lunar.function.ThrowingBiConsumer;
 import net.kyori.lunar.function.ThrowingBiFunction;
 import net.kyori.lunar.function.ThrowingConsumer;
 import net.kyori.lunar.function.ThrowingFunction;
+import net.kyori.lunar.function.ThrowingPredicate;
 import net.kyori.lunar.function.ThrowingRunnable;
 import net.kyori.lunar.function.ThrowingSupplier;
 
@@ -38,6 +39,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
@@ -177,6 +179,38 @@ public final class Exceptions {
     return (first, second) -> {
       try {
         return function.throwingApply(first, second);
+      } catch(final Throwable t) {
+        throw rethrow(unwrap(t));
+      }
+    };
+  }
+
+  /**
+   * Returns the same throwing predicate.
+   *
+   * @param predicate the predicate
+   * @param <T> the input type
+   * @param <E> the exception type
+   * @return the predicate
+   */
+  @NonNull
+  public static <T, E extends Exception> Predicate<T> rethrowPredicate(@NonNull final ThrowingPredicate<T, E> predicate) {
+    return predicate;
+  }
+
+  /**
+   * Returns a predicate which will unwrap and rethrow any throwables caught in {@code predicate}.
+   *
+   * @param predicate the predicate
+   * @param <T> the input type
+   * @param <E> the exception type
+   * @return a predicate
+   */
+  @NonNull
+  public static <T, E extends Exception> Predicate<T> unwrappingRethrowPredicate(@NonNull final ThrowingPredicate<T, E> predicate) {
+    return input -> {
+      try {
+        return predicate.throwingTest(input);
       } catch(final Throwable t) {
         throw rethrow(unwrap(t));
       }
