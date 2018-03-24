@@ -89,7 +89,7 @@ public final class Exceptions {
    * @return the bi-consumer
    */
   @NonNull
-  public static <T, U, E extends Exception> BiConsumer<T, U> rethrowConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
+  public static <T, U, E extends Exception> BiConsumer<T, U> rethrowBiConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
     return consumer;
   }
 
@@ -103,7 +103,7 @@ public final class Exceptions {
    * @return a consumer
    */
   @NonNull
-  public static <T, U, E extends Exception> BiConsumer<T, U> unwrappingRethrowConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
+  public static <T, U, E extends Exception> BiConsumer<T, U> unwrappingRethrowBiConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
     return (first, second) -> {
       try {
         consumer.throwingAccept(first, second);
@@ -158,7 +158,7 @@ public final class Exceptions {
    * @return the bi-function
    */
   @NonNull
-  public static <T, U, R, E extends Exception> BiFunction<T, U, R> rethrowFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
+  public static <T, U, R, E extends Exception> BiFunction<T, U, R> rethrowBiFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
     return function;
   }
 
@@ -173,7 +173,7 @@ public final class Exceptions {
    * @return a bi-function
    */
   @NonNull
-  public static <T, U, R, E extends Exception> BiFunction<T, U, R> unwrappingRethrowFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
+  public static <T, U, R, E extends Exception> BiFunction<T, U, R> unwrappingRethrowBiFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
     return (first, second) -> {
       try {
         return function.throwingApply(first, second);
