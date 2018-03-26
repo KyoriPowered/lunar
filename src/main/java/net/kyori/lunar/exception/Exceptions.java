@@ -260,6 +260,19 @@ public final class Exceptions {
   }
 
   /**
+   * Gets the result of {@code supplier}, or re-throws an exception, sneakily.
+   *
+   * @param supplier the supplier
+   * @param <T> the result type
+   * @param <E> the exception type
+   * @return the result
+   */
+  @NonNull
+  public static <T, E extends Throwable> T getOrRethrow(@NonNull final ThrowingSupplier<T, E> supplier) {
+    return supplier.get(); // get() rethrows for us
+  }
+
+  /**
    * Re-throws an exception, sneakily.
    *
    * @param exception the exception
