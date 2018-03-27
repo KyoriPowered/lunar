@@ -24,8 +24,10 @@
 package net.kyori.lunar;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * A collection of utilities for working with objects.
@@ -46,5 +48,33 @@ public final class EvenMoreObjects {
   public static <T> T make(@NonNull final T value, @NonNull final Consumer<T> consumer) {
     consumer.accept(value);
     return value;
+  }
+
+  /**
+   * Tests if {@code you} equals {@code me}.
+   *
+   * @param me this
+   * @param you that
+   * @param predicate the predicate
+   * @param <T> the type
+   * @return {@code true} if {@code you} equals {@code me}
+   */
+  public static <T> boolean equals(@NonNull final T me, @Nullable final Object you, @NonNull final Predicate<T> predicate) {
+    final Class<T> type = (Class<T>) me.getClass();
+    return equals(type, me, you, predicate);
+  }
+
+  /**
+   * Tests if {@code you} equals {@code me}.
+   *
+   * @param type the type of {@code me}
+   * @param me this
+   * @param you that
+   * @param predicate the predicate
+   * @param <T> the type
+   * @return {@code true} if {@code you} equals {@code me}
+   */
+  public static <T> boolean equals(@NonNull final Class<T> type, @NonNull final T me, @Nullable final Object you, @NonNull final Predicate<T> predicate) {
+    return me == you || (you != null && type.isInstance(you) && predicate.test(type.cast(you)));
   }
 }
