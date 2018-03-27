@@ -58,7 +58,7 @@ public final class Exceptions {
    * @return the consumer
    */
   @NonNull
-  public static <T, E extends Exception> Consumer<T> rethrowConsumer(@NonNull final ThrowingConsumer<T, E> consumer) {
+  public static <T, E extends Throwable> Consumer<T> rethrowConsumer(@NonNull final ThrowingConsumer<T, E> consumer) {
     return consumer;
   }
 
@@ -71,7 +71,7 @@ public final class Exceptions {
    * @return a consumer
    */
   @NonNull
-  public static <T, E extends Exception> Consumer<T> unwrappingRethrowConsumer(@NonNull final ThrowingConsumer<T, E> consumer) {
+  public static <T, E extends Throwable> Consumer<T> unwrappingRethrowConsumer(@NonNull final ThrowingConsumer<T, E> consumer) {
     return input -> {
       try {
         consumer.throwingAccept(input);
@@ -91,7 +91,7 @@ public final class Exceptions {
    * @return the bi-consumer
    */
   @NonNull
-  public static <T, U, E extends Exception> BiConsumer<T, U> rethrowBiConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
+  public static <T, U, E extends Throwable> BiConsumer<T, U> rethrowBiConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
     return consumer;
   }
 
@@ -105,7 +105,7 @@ public final class Exceptions {
    * @return a consumer
    */
   @NonNull
-  public static <T, U, E extends Exception> BiConsumer<T, U> unwrappingRethrowBiConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
+  public static <T, U, E extends Throwable> BiConsumer<T, U> unwrappingRethrowBiConsumer(@NonNull final ThrowingBiConsumer<T, U, E> consumer) {
     return (first, second) -> {
       try {
         consumer.throwingAccept(first, second);
@@ -125,7 +125,7 @@ public final class Exceptions {
    * @return the function
    */
   @NonNull
-  public static <T, R, E extends Exception> Function<T, R> rethrowFunction(@NonNull final ThrowingFunction<T, R, E> function) {
+  public static <T, R, E extends Throwable> Function<T, R> rethrowFunction(@NonNull final ThrowingFunction<T, R, E> function) {
     return function;
   }
 
@@ -139,7 +139,7 @@ public final class Exceptions {
    * @return a function
    */
   @NonNull
-  public static <T, R, E extends Exception> Function<T, R> unwrappingRethrowFunction(@NonNull final ThrowingFunction<T, R, E> function) {
+  public static <T, R, E extends Throwable> Function<T, R> unwrappingRethrowFunction(@NonNull final ThrowingFunction<T, R, E> function) {
     return input -> {
       try {
         return function.throwingApply(input);
@@ -160,7 +160,7 @@ public final class Exceptions {
    * @return the bi-function
    */
   @NonNull
-  public static <T, U, R, E extends Exception> BiFunction<T, U, R> rethrowBiFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
+  public static <T, U, R, E extends Throwable> BiFunction<T, U, R> rethrowBiFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
     return function;
   }
 
@@ -175,7 +175,7 @@ public final class Exceptions {
    * @return a bi-function
    */
   @NonNull
-  public static <T, U, R, E extends Exception> BiFunction<T, U, R> unwrappingRethrowBiFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
+  public static <T, U, R, E extends Throwable> BiFunction<T, U, R> unwrappingRethrowBiFunction(@NonNull final ThrowingBiFunction<T, U, R, E> function) {
     return (first, second) -> {
       try {
         return function.throwingApply(first, second);
@@ -194,7 +194,7 @@ public final class Exceptions {
    * @return the predicate
    */
   @NonNull
-  public static <T, E extends Exception> Predicate<T> rethrowPredicate(@NonNull final ThrowingPredicate<T, E> predicate) {
+  public static <T, E extends Throwable> Predicate<T> rethrowPredicate(@NonNull final ThrowingPredicate<T, E> predicate) {
     return predicate;
   }
 
@@ -207,7 +207,7 @@ public final class Exceptions {
    * @return a predicate
    */
   @NonNull
-  public static <T, E extends Exception> Predicate<T> unwrappingRethrowPredicate(@NonNull final ThrowingPredicate<T, E> predicate) {
+  public static <T, E extends Throwable> Predicate<T> unwrappingRethrowPredicate(@NonNull final ThrowingPredicate<T, E> predicate) {
     return input -> {
       try {
         return predicate.throwingTest(input);
@@ -236,7 +236,7 @@ public final class Exceptions {
    * @return the supplier
    */
   @NonNull
-  public static <T, E extends Exception> Supplier<T> rethrowSupplier(@NonNull final ThrowingSupplier<T, E> supplier) {
+  public static <T, E extends Throwable> Supplier<T> rethrowSupplier(@NonNull final ThrowingSupplier<T, E> supplier) {
     return supplier;
   }
 
@@ -249,7 +249,7 @@ public final class Exceptions {
    * @return a supplier
    */
   @NonNull
-  public static <T, E extends Exception> Supplier<T> unwrappingRethrowSupplier(@NonNull final ThrowingSupplier<T, E> supplier) {
+  public static <T, E extends Throwable> Supplier<T> unwrappingRethrowSupplier(@NonNull final ThrowingSupplier<T, E> supplier) {
     return () -> {
       try {
         return supplier.throwingGet();

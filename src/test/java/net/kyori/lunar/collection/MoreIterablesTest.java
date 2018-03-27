@@ -21,32 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar;
+package net.kyori.lunar.collection;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class OptionalsTest {
+class MoreIterablesTest {
   @Test
-  void testFirst() {
-    final Optional<String> expected = Optional.of("meow");
-    assertEquals(expected, Optionals.first(
-      expected,
-      Optional.empty(),
-      Optional.empty()
-    ));
-    assertEquals(expected, Optionals.first(
-      Optional.empty(),
-      expected,
-      Optional.empty()
-    ));
-    assertEquals(expected, Optionals.first(
-      Optional.empty(),
-      Optional.empty(),
-      expected
-    ));
+  void testRandom() {
+    final Collection<String> a = Arrays.asList(
+      "abc",
+      "def",
+      "ghi",
+      "jkl"
+    );
+    assertTrue(a.contains(MoreIterables.random(a)));
+  }
+
+  @Test
+  void testRandomThrows() {
+    final Collection<String> b = Collections.singletonList("abc");
+    final IndexOutOfBoundsException ioobe = assertThrows(IndexOutOfBoundsException.class, () -> assertFalse(b.contains(MoreIterables.random(b, Collections.singletonList("def")))));
+    assertEquals("cannot get random value from empty iterable", ioobe.getMessage());
   }
 }
