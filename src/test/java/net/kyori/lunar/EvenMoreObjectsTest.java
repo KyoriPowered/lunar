@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EvenMoreObjectsTest {
@@ -41,5 +42,26 @@ class EvenMoreObjectsTest {
     assertEquals(2, values.size());
     assertTrue(values.contains("abc"));
     assertTrue(values.contains("def"));
+  }
+
+  @Test
+  void testEquals() {
+    assertTrue(new Foo(0).equals(new Foo(0)));
+    assertFalse(new Foo(0).equals(new Foo(1)));
+  }
+
+  private static class Foo {
+    private final int baz;
+
+    private Foo(final int baz) {
+      this.baz = baz;
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+      return EvenMoreObjects.equals(this, other, that -> {
+        return this.baz == that.baz;
+      });
+    }
   }
 }
