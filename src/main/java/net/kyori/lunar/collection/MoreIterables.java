@@ -32,57 +32,61 @@ import java.util.Random;
  * A collection of utilities for working with iterables.
  */
 public final class MoreIterables {
-    private static final Random RANDOM = new Random();
+  private static final Random RANDOM = new Random();
 
-    private MoreIterables() {
-    }
+  private MoreIterables() {
+  }
 
-    /**
-     * Gets a random element from an iterable.
-     *
-     * @param iterable the iterable
-     * @param <T> the type
-     * @return a random element
-     */
-    public static <T> T random(final Iterable<T> iterable) {
-        return random(RANDOM, iterable);
-    }
+  /**
+   * Gets a random element from an iterable.
+   *
+   * @param iterable the iterable
+   * @param <T> the type
+   * @return a random element
+   */
+  public static <T> T random(final Iterable<T> iterable) {
+    return random(RANDOM, iterable);
+  }
 
-    /**
-     * Gets a random element from an iterable.
-     *
-     * @param iterable the iterable
-     * @param allowed a collection of allowed values
-     * @param <T> the type
-     * @return a random element
-     */
-    public static <T> T random(final Iterable<T> iterable, final Collection<T> allowed) {
-        return random(Iterables.filter(iterable, allowed::contains));
-    }
+  /**
+   * Gets a random element from an iterable.
+   *
+   * @param iterable the iterable
+   * @param allowed a collection of allowed values
+   * @param <T> the type
+   * @return a random element
+   */
+  public static <T> T random(final Iterable<T> iterable, final Collection<T> allowed) {
+    return random(Iterables.filter(iterable, allowed::contains));
+  }
 
-    /**
-     * Gets a random element from an iterable.
-     *
-     * @param random the random
-     * @param iterable the iterable
-     * @param <T> the type
-     * @return a random element
-     */
-    public static <T> T random(final Random random, final Iterable<T> iterable) {
-        final int index = random.nextInt(Iterables.size(iterable));
-        return Iterables.get(iterable, index);
+  /**
+   * Gets a random element from an iterable.
+   *
+   * @param random the random
+   * @param iterable the iterable
+   * @param <T> the type
+   * @return a random element
+   */
+  public static <T> T random(final Random random, final Iterable<T> iterable) {
+    final int size = Iterables.size(iterable);
+    if(size == 0) {
+      throw new IndexOutOfBoundsException("cannot get random value from empty iterable");
     }
+    final int index = random.nextInt(size);
+    return Iterables.get(iterable, index);
+  }
 
-    /**
-     * Gets a random element from an iterable.
-     *
-     * @param random the random
-     * @param iterable the iterable
-     * @param allowed a collection of allowed values
-     * @param <T> the type
-     * @return a random element
-     */
-    public static <T> T random(final Random random, final Iterable<T> iterable, final Collection<T> allowed) {
-        return random(random, Iterables.filter(iterable, allowed::contains));
-    }
+  /**
+   * Gets a random element from an iterable.
+   *
+   * @param random the random
+   * @param iterable the iterable
+   * @param allowed a collection of allowed values
+   * @param <T> the type
+   * @return a random element
+   */
+  public static <T> T random(final Random random, final Iterable<T> iterable, final Collection<T> allowed) {
+    return random(random, Iterables.filter(iterable, allowed::contains));
+  }
 }
