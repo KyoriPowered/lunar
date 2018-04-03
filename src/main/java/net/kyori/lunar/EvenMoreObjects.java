@@ -28,12 +28,25 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * A collection of utilities for working with objects.
  */
 public final class EvenMoreObjects {
   private EvenMoreObjects() {
+  }
+
+  /**
+   * Gets a {@code T} from {@code supplier}.
+   *
+   * @param supplier the supplier
+   * @param <T> the value type
+   * @return the value
+   */
+  @NonNull
+  public static <T> T get(final Supplier<T> supplier) {
+    return supplier.get();
   }
 
   /**

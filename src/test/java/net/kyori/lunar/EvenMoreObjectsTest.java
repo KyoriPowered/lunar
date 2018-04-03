@@ -26,6 +26,7 @@ package net.kyori.lunar;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,14 +35,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EvenMoreObjectsTest {
   @Test
+  void testGet() {
+    final List<String> values = EvenMoreObjects.get(() -> Arrays.asList("abc", "def"));
+    assertEquals(2, values.size());
+    assertEquals("abc", values.get(0));
+    assertEquals("def", values.get(1));
+  }
+
+  @Test
   void testMake() {
     final List<String> values = EvenMoreObjects.make(new ArrayList<>(), (list) -> {
       list.add("abc");
       list.add("def");
     });
     assertEquals(2, values.size());
-    assertTrue(values.contains("abc"));
-    assertTrue(values.contains("def"));
+    assertEquals("abc", values.get(0));
+    assertEquals("def", values.get(1));
   }
 
   @Test
