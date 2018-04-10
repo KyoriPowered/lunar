@@ -52,7 +52,6 @@ public final class EvenMoreExecutors {
   }
 
   private static final class CompletableDecorator extends AbstractCompletableExecutorService implements ForwardingExecutorService {
-
     private final ExecutorService executorService;
 
     CompletableDecorator(final ExecutorService executorService) {
