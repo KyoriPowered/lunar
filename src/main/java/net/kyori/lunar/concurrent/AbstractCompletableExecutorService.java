@@ -33,31 +33,28 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.RunnableFuture;
 
 public abstract class AbstractCompletableExecutorService extends AbstractExecutorService implements CompletableExecutorService {
-  @NonNull
   @Override
-  public CompletableFuture<?> submit(@NonNull final Runnable task) {
+  public @NonNull CompletableFuture<?> submit(final @NonNull Runnable task) {
     return (CompletableFuture<?>) super.submit(task);
   }
 
-  @NonNull
   @Override
-  public <T> CompletableFuture<T> submit(@NonNull final Runnable task, @Nullable final T result) {
+  public <T> @NonNull CompletableFuture<T> submit(final @NonNull Runnable task, final @Nullable T result) {
     return (CompletableFuture<T>) super.submit(task, result);
   }
 
-  @NonNull
   @Override
-  public <T> CompletableFuture<T> submit(@NonNull final Callable<T> task) {
+  public <T> @NonNull CompletableFuture<T> submit(final @NonNull Callable<T> task) {
     return (CompletableFuture<T>) super.submit(task);
   }
 
   @Override
-  protected <T> RunnableFuture<T> newTaskFor(@NonNull final Runnable runnable, @Nullable final T value) {
+  protected <T> RunnableFuture<T> newTaskFor(final @NonNull Runnable runnable, final @Nullable T value) {
     return new RunnableCompletableFuture<>(Executors.callable(runnable, value));
   }
 
   @Override
-  protected <T> RunnableFuture<T> newTaskFor(@NonNull final Callable<T> callable) {
+  protected <T> RunnableFuture<T> newTaskFor(final @NonNull Callable<T> callable) {
     return new RunnableCompletableFuture<>(callable);
   }
 }

@@ -37,6 +37,5 @@ public interface Reified<T> {
    *
    * @return a type token
    */
-  @NonNull
-  TypeToken<T> type();
+  @NonNull TypeToken<T> type();
 }

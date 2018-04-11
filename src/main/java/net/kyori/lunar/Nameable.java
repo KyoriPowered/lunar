@@ -34,6 +34,5 @@ public interface Nameable {
    *
    * @return the name
    */
-  @NonNull
-  String name();
+  @NonNull String name();
 }

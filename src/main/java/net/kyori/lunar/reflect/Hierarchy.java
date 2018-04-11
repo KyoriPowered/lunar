@@ -48,13 +48,12 @@ public final class Hierarchy {
    * @return a class matching the {@code type} and {@code predicate}
    */
   // thanks, kenzie
-  @Nullable
-  public static <T> Class<? extends T> find(@NonNull final Class<? extends T> first, @NonNull final Class<T> type, @NonNull final Predicate<Class<? extends T>> predicate) {
+  public static <T> @Nullable Class<? extends T> find(final @NonNull Class<? extends T> first, final @NonNull Class<T> type, final @NonNull Predicate<Class<? extends T>> predicate) {
     final Deque<Class<?>> classes = new LinkedList<>();
     classes.add(first);
 
     while(!classes.isEmpty()) {
-      @Nullable final Class<?> next = classes.removeFirst();
+      final /* @Nullable */ Class<?> next = classes.removeFirst();
       if(next == null || !type.isAssignableFrom(next)) {
         continue;
       }

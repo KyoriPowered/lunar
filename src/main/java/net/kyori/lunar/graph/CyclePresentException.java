@@ -45,7 +45,7 @@ public final class CyclePresentException extends IllegalArgumentException {
    * This special generic type eases the transition from and to
    * {@code Collection<Collection<T>>}.
    */
-  @NonNull private final Collection<? extends Collection<?>> components;
+  private final @NonNull Collection<? extends Collection<?>> components;
 
   /**
    * Constructs the exception. Only used by the topological sorters.
@@ -53,7 +53,7 @@ public final class CyclePresentException extends IllegalArgumentException {
    * @param message the error message
    * @param components the collection of strongly connected components
    */
-  CyclePresentException(@NonNull final String message, @NonNull final Collection<? extends Collection<?>> components) {
+  CyclePresentException(final @NonNull String message, final @NonNull Collection<? extends Collection<?>> components) {
     super(message);
     this.components = components;
   }
@@ -67,9 +67,8 @@ public final class CyclePresentException extends IllegalArgumentException {
    * @param <T> the node type restored
    * @return the strongly connected components
    */
-  @NonNull
   @SuppressWarnings("unchecked")
-  public <T> Collection<Collection<T>> components() {
+  public <T> @NonNull Collection<Collection<T>> components() {
     return (Collection<Collection<T>>) this.components;
   }
 }

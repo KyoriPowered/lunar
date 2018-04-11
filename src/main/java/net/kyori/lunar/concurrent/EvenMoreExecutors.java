@@ -44,7 +44,7 @@ public final class EvenMoreExecutors {
    * @param executorService the executor service
    * @return a completable executor service
    */
-  public static CompletableExecutorService completableDecorator(final ExecutorService executorService) {
+  public static @NonNull CompletableExecutorService completableDecorator(final @NonNull ExecutorService executorService) {
     if(executorService instanceof CompletableExecutorService) {
       return (CompletableExecutorService) executorService;
     }
@@ -58,9 +58,8 @@ public final class EvenMoreExecutors {
       this.executorService = executorService;
     }
 
-    @NonNull
     @Override
-    public ExecutorService executorService() {
+    public @NonNull ExecutorService executorService() {
       return this.executorService;
     }
   }
