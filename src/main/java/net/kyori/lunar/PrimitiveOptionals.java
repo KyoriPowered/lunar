@@ -47,8 +47,7 @@ public final class PrimitiveOptionals {
    * @param operator the operator
    * @return an optional
    */
-  @NonNull
-  public static OptionalDouble map(@NonNull final OptionalDouble optional, @NonNull final DoubleUnaryOperator operator) {
+  public static @NonNull OptionalDouble map(final @NonNull OptionalDouble optional, final @NonNull DoubleUnaryOperator operator) {
     requireNonNull(operator, "operator");
     return optional.isPresent() ? OptionalDouble.of(operator.applyAsDouble(optional.getAsDouble())) : OptionalDouble.empty();
   }
@@ -61,8 +60,7 @@ public final class PrimitiveOptionals {
    * @param function the function
    * @return an optional
    */
-  @NonNull
-  public static OptionalInt mapToInt(@NonNull final OptionalDouble optional, @NonNull final DoubleToIntFunction function) {
+  public static @NonNull OptionalInt mapToInt(final @NonNull OptionalDouble optional, final @NonNull DoubleToIntFunction function) {
     requireNonNull(function, "function");
     return optional.isPresent() ? OptionalInt.of(function.applyAsInt(optional.getAsDouble())) : OptionalInt.empty();
   }

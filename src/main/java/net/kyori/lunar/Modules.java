@@ -44,8 +44,7 @@ public final class Modules {
    * @param paths the paths
    * @return a new layer
    */
-  @NonNull
-  public static ModuleLayer createLayer(@NonNull final Set<Path> paths) {
+  public static @NonNull ModuleLayer createLayer(final @NonNull Set<Path> paths) {
     return createLayer(ModuleLayer.boot(), paths);
   }
 
@@ -56,8 +55,7 @@ public final class Modules {
    * @param paths the paths
    * @return a new layer
    */
-  @NonNull
-  public static ModuleLayer createLayer(@NonNull final ModuleLayer parent, @NonNull final Set<Path> paths) {
+  public static @NonNull ModuleLayer createLayer(final @NonNull ModuleLayer parent, final @NonNull Set<Path> paths) {
     final ModuleFinder finder = ModuleFinder.of(paths.toArray(new Path[paths.size()]));
     final Set<String> modules = finder.findAll().stream().map(reference -> reference.descriptor().name()).collect(Collectors.toSet());
     final Configuration configuration = parent.configuration().resolve(finder, ModuleFinder.of(), modules);

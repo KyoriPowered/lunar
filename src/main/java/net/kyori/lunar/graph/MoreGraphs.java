@@ -53,8 +53,7 @@ public final class MoreGraphs {
    * @throws CyclePresentException if the graph has cycles
    * @throws IllegalArgumentException if the graph is not directed or allows self loops
    */
-  @NonNull
-  public static <T> List<T> topologicalSort(@NonNull final Graph<T> graph) {
+  public static <T> @NonNull List<T> topologicalSort(final @NonNull Graph<T> graph) {
     return topologicalSort(graph, SortType.random());
   }
 
@@ -70,8 +69,7 @@ public final class MoreGraphs {
    * @throws CyclePresentException if the graph has cycles
    * @throws IllegalArgumentException if the graph is not directed or allows self loops
    */
-  @NonNull
-  public static <T> List<T> orderedTopologicalSort(@NonNull final Graph<T> graph, @NonNull final Comparator<T> comparator) {
+  public static <T> @NonNull List<T> orderedTopologicalSort(final @NonNull Graph<T> graph, final @NonNull Comparator<T> comparator) {
     return topologicalSort(graph, new ComparatorSortType<>(comparator));
   }
 
@@ -86,8 +84,7 @@ public final class MoreGraphs {
    * @throws CyclePresentException if the graph has cycles
    * @throws IllegalArgumentException if the graph is not directed or allows self loops
    */
-  @NonNull
-  public static <T extends Comparable<? super T>> List<T> orderedTopologicalSort(@NonNull final Graph<T> graph) {
+  public static <T extends Comparable<? super T>> @NonNull List<T> orderedTopologicalSort(final @NonNull Graph<T> graph) {
     return topologicalSort(graph, SortType.comparable());
   }
 
@@ -101,8 +98,7 @@ public final class MoreGraphs {
    * @throws CyclePresentException if the graph has cycles
    * @throws IllegalArgumentException if the graph is not directed or allows self loops
    */
-  @NonNull
-  private static <T> List<T> topologicalSort(@NonNull final Graph<T> graph, @NonNull final SortType<T> type) {
+  private static <T> @NonNull List<T> topologicalSort(final @NonNull Graph<T> graph, final @NonNull SortType<T> type) {
     checkArgument(graph.isDirected(), "the graph must be directed");
     checkArgument(!graph.allowsSelfLoops(), "the graph cannot allow self loops");
 

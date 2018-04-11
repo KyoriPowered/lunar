@@ -44,8 +44,7 @@ public final class EvenMoreObjects {
    * @param <T> the value type
    * @return the value
    */
-  @NonNull
-  public static <T> T get(final Supplier<T> supplier) {
+  public static <T> @NonNull T get(final Supplier<T> supplier) {
     return supplier.get();
   }
 
@@ -57,8 +56,7 @@ public final class EvenMoreObjects {
    * @param <T> the value type
    * @return the value
    */
-  @NonNull
-  public static <T> T make(@NonNull final T value, @NonNull final Consumer<T> consumer) {
+  public static <T> @NonNull T make(final @NonNull T value, final @NonNull Consumer<T> consumer) {
     consumer.accept(value);
     return value;
   }
@@ -72,7 +70,7 @@ public final class EvenMoreObjects {
    * @param <T> the type
    * @return {@code true} if {@code you} equals {@code me}
    */
-  public static <T> boolean equals(@NonNull final T me, @Nullable final Object you, @NonNull final Predicate<T> predicate) {
+  public static <T> boolean equals(final @NonNull T me, final @Nullable Object you, final @NonNull Predicate<T> predicate) {
     final Class<T> type = (Class<T>) me.getClass();
     return equals(type, me, you, predicate);
   }
@@ -87,7 +85,7 @@ public final class EvenMoreObjects {
    * @param <T> the type
    * @return {@code true} if {@code you} equals {@code me}
    */
-  public static <T> boolean equals(@NonNull final Class<T> type, @NonNull final T me, @Nullable final Object you, @NonNull final Predicate<T> predicate) {
+  public static <T> boolean equals(final @NonNull Class<T> type, final @NonNull T me, final @Nullable Object you, final @NonNull Predicate<T> predicate) {
     return me == you || (you != null && type.isInstance(you) && predicate.test(type.cast(you)));
   }
 }

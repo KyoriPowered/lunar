@@ -51,8 +51,7 @@ interface SortType<T> {
    *
    * @return the new queue
    */
-  @NonNull
-  Queue<T> createQueue();
+  @NonNull Queue<T> createQueue();
 
   /**
    * Gets the type-safe instance of the random sort type.
@@ -60,9 +59,8 @@ interface SortType<T> {
    * @param <T> the node type
    * @return the random sort type
    */
-  @NonNull
   @SuppressWarnings("unchecked")
-  static <T> SortType<T> random() {
+  static <T> @NonNull SortType<T> random() {
     return (SortType<T>) RANDOM;
   }
 
@@ -72,9 +70,8 @@ interface SortType<T> {
    * @param <T> the node type
    * @return the comparable sort type
    */
-  @NonNull
   @SuppressWarnings("unchecked")
-  static <T extends Comparable<?>> SortType<T> comparable() {
+  static <T extends Comparable<?>> @NonNull SortType<T> comparable() {
     return (SortType<T>) COMPARABLE;
   }
 }

@@ -48,9 +48,8 @@ public interface CompletableExecutorService extends ExecutorService {
    * @throws NullPointerException if the task is null
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    */
-  @NonNull
   @Override
-  <T> CompletableFuture<T> submit(@NonNull final Callable<T> task);
+  <T> @NonNull CompletableFuture<T> submit(final @NonNull Callable<T> task);
 
   /**
    * {@inheritDoc}
@@ -62,9 +61,8 @@ public interface CompletableExecutorService extends ExecutorService {
    * @throws NullPointerException if the task is null
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    */
-  @NonNull
   @Override
-  <T> CompletableFuture<T> submit(@NonNull final Runnable task, @Nullable final T result);
+  <T> @NonNull CompletableFuture<T> submit(final @NonNull Runnable task, final @Nullable T result);
 
   /**
    * {@inheritDoc}
@@ -74,9 +72,8 @@ public interface CompletableExecutorService extends ExecutorService {
    * @throws NullPointerException if the task is null
    * @throws RejectedExecutionException {@inheritDoc}
    */
-  @NonNull
   @Override
-  CompletableFuture<?> submit(@NonNull final Runnable task);
+  @NonNull CompletableFuture<?> submit(final @NonNull Runnable task);
 
   /**
    * {@inheritDoc}
@@ -87,9 +84,8 @@ public interface CompletableExecutorService extends ExecutorService {
    *     order as produced by the iterator for the given task list, each of which has completed
    * @throws InterruptedException if interrupted while waiting, in which case unfinished tasks are cancelled
    */
-  @NonNull
   @Override
-  <T> List<Future<T>> invokeAll(@NonNull final Collection<? extends Callable<T>> tasks) throws InterruptedException;
+  <T> @NonNull List<Future<T>> invokeAll(final @NonNull Collection<? extends Callable<T>> tasks) throws InterruptedException;
 
   /**
    * {@inheritDoc}
@@ -104,7 +100,6 @@ public interface CompletableExecutorService extends ExecutorService {
    *     completed
    * @throws InterruptedException if interrupted while waiting, in which case unfinished tasks are cancelled
    */
-  @NonNull
   @Override
-  <T> List<Future<T>> invokeAll(@NonNull final Collection<? extends Callable<T>> tasks, final long timeout, @NonNull final TimeUnit unit) throws InterruptedException;
+  <T> @NonNull List<Future<T>> invokeAll(final @NonNull Collection<? extends Callable<T>> tasks, final long timeout, final @NonNull TimeUnit unit) throws InterruptedException;
 }

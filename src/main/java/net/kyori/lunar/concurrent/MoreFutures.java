@@ -42,8 +42,7 @@ public final class MoreFutures {
    * @param <T> the type
    * @return an exceptionally completed completable future
    */
-  @NonNull
-  public static <T> CompletableFuture<T> immediateFailedFuture(@NonNull final Throwable ex) {
+  public static <T> @NonNull CompletableFuture<T> immediateFailedFuture(final @NonNull Throwable ex) {
     final CompletableFuture<T> future = new CompletableFuture<>();
     future.completeExceptionally(ex);
     return future;

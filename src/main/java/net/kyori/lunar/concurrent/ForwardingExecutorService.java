@@ -43,17 +43,15 @@ public interface ForwardingExecutorService extends ExecutorService {
    *
    * @return the forwarded executor service
    */
-  @NonNull
-  ExecutorService executorService();
+  @NonNull ExecutorService executorService();
 
   @Override
   default void shutdown() {
     this.executorService().shutdown();
   }
 
-  @NonNull
   @Override
-  default List<Runnable> shutdownNow() {
+  default @NonNull List<Runnable> shutdownNow() {
     return this.executorService().shutdownNow();
   }
 
@@ -68,53 +66,47 @@ public interface ForwardingExecutorService extends ExecutorService {
   }
 
   @Override
-  default boolean awaitTermination(final long timeout, @NonNull final TimeUnit unit) throws InterruptedException {
+  default boolean awaitTermination(final long timeout, final @NonNull TimeUnit unit) throws InterruptedException {
     return this.executorService().awaitTermination(timeout, unit);
   }
 
-  @NonNull
   @Override
-  default <T> Future<T> submit(@NonNull final Callable<T> task) {
+  default <T> @NonNull Future<T> submit(final @NonNull Callable<T> task) {
     return this.executorService().submit(task);
   }
 
-  @NonNull
   @Override
-  default <T> Future<T> submit(@NonNull final Runnable task, final T result) {
+  default <T> @NonNull Future<T> submit(final @NonNull Runnable task, final T result) {
     return this.executorService().submit(task, result);
   }
 
-  @NonNull
   @Override
-  default Future<?> submit(@NonNull final Runnable task) {
+  default @NonNull Future<?> submit(final @NonNull Runnable task) {
     return this.executorService().submit(task);
   }
 
-  @NonNull
   @Override
-  default <T> List<Future<T>> invokeAll(@NonNull final Collection<? extends Callable<T>> tasks) throws InterruptedException {
+  default <T> @NonNull List<Future<T>> invokeAll(final @NonNull Collection<? extends Callable<T>> tasks) throws InterruptedException {
     return this.executorService().invokeAll(tasks);
   }
 
-  @NonNull
   @Override
-  default <T> List<Future<T>> invokeAll(@NonNull final Collection<? extends Callable<T>> tasks, final long timeout, @NonNull final TimeUnit unit) throws InterruptedException {
+  default <T> @NonNull List<Future<T>> invokeAll(final @NonNull Collection<? extends Callable<T>> tasks, final long timeout, final @NonNull TimeUnit unit) throws InterruptedException {
     return this.executorService().invokeAll(tasks, timeout, unit);
   }
 
-  @NonNull
   @Override
-  default <T> T invokeAny(@NonNull final Collection<? extends Callable<T>> tasks) throws ExecutionException, InterruptedException {
+  default <T> @NonNull T invokeAny(final @NonNull Collection<? extends Callable<T>> tasks) throws ExecutionException, InterruptedException {
     return this.executorService().invokeAny(tasks);
   }
 
   @Override
-  default <T> T invokeAny(@NonNull final Collection<? extends Callable<T>> tasks, final long timeout, @NonNull final TimeUnit unit) throws ExecutionException, InterruptedException, TimeoutException {
+  default <T> T invokeAny(final @NonNull Collection<? extends Callable<T>> tasks, final long timeout, final @NonNull TimeUnit unit) throws ExecutionException, InterruptedException, TimeoutException {
     return this.executorService().invokeAny(tasks, timeout, unit);
   }
 
   @Override
-  default void execute(@NonNull final Runnable command) {
+  default void execute(final @NonNull Runnable command) {
     this.executorService().execute(command);
   }
 }

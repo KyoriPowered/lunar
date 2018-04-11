@@ -37,8 +37,7 @@ final class ComparatorSortType<T> implements SortType<T> {
   }
 
   @Override
-  @NonNull
-  public Queue<T> createQueue() {
+  public @NonNull Queue<T> createQueue() {
     return new PriorityQueue<>(this.comparator);
   }
 }

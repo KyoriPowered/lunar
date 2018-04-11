@@ -45,15 +45,15 @@ import java.util.Objects;
  */
 @VisibleForTesting
 final class StronglyConnectedComponentAnalyzer<T> {
-  @NonNull private final Map<T, Integer> ids = new HashMap<>();
-  @NonNull private final Deque<T> stack = new ArrayDeque<>();
-  @NonNull private final Collection<Collection<T>> components = new ArrayList<>();
-  @NonNull private final Graph<T> graph;
-  @NonNull private final int[] low;
-  @NonNegative private int currentId = 0;
+  private final @NonNull Map<T, Integer> ids = new HashMap<>();
+  private final @NonNull Deque<T> stack = new ArrayDeque<>();
+  private final @NonNull Collection<Collection<T>> components = new ArrayList<>();
+  private final @NonNull Graph<T> graph;
+  private final @NonNull int[] low;
+  private @NonNegative int currentId = 0;
 
   @VisibleForTesting
-  StronglyConnectedComponentAnalyzer(@NonNull final Graph<T> graph) {
+  StronglyConnectedComponentAnalyzer(final @NonNull Graph<T> graph) {
     this.graph = graph;
     this.low = new int[graph.nodes().size()];
   }
@@ -67,14 +67,12 @@ final class StronglyConnectedComponentAnalyzer<T> {
     }
   }
 
-  @NonNull
   @VisibleForTesting
-  Collection<Collection<T>> getComponents() {
+  @NonNull Collection<Collection<T>> getComponents() {
     return this.components;
   }
 
-  @NonNull
-  String renderCycles() {
+  @NonNull String renderCycles() {
     final StringBuilder reporter = new StringBuilder();
     for(final Collection<T> component : this.components) {
       if(component.size() > 1) {

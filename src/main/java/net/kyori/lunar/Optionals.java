@@ -42,9 +42,8 @@ public final class Optionals {
    * @param <T> the type
    * @return an optional
    */
-  @NonNull
   @SafeVarargs
-  public static <T> Optional<T> first(final Optional<T>... optionals) {
+  public static <T> @NonNull Optional<T> first(final Optional<T>... optionals) {
     return Arrays.stream(optionals)
       .filter(Optional::isPresent)
       .findFirst()
