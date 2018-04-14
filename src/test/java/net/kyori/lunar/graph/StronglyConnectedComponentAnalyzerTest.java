@@ -42,7 +42,7 @@ class StronglyConnectedComponentAnalyzerTest {
 
     final StronglyConnectedComponentAnalyzer<Integer> analyzer = new StronglyConnectedComponentAnalyzer<>(graph);
     analyzer.analyze();
-    assertEquals(1, analyzer.getComponents().size());
+    assertEquals(1, analyzer.components().size());
     // one strongly connected component {1, 2, 3}
   }
 
@@ -65,7 +65,7 @@ class StronglyConnectedComponentAnalyzerTest {
 
     final StronglyConnectedComponentAnalyzer<Integer> analyzer = new StronglyConnectedComponentAnalyzer<>(graph);
     analyzer.analyze();
-    assertEquals(2, analyzer.getComponents().size());
+    assertEquals(2, analyzer.components().size());
     // two strongly connected component {1, 2, 3} {4, 5, 6}
   }
 }
