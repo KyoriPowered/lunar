@@ -68,7 +68,7 @@ final class StronglyConnectedComponentAnalyzer<T> {
   }
 
   @VisibleForTesting
-  @NonNull Collection<Collection<T>> getComponents() {
+  @NonNull Collection<Collection<T>> components() {
     return this.components;
   }
 

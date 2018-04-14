@@ -136,7 +136,7 @@ public final class MoreGraphs {
     if(!requiredCounts.isEmpty()) {
       final StronglyConnectedComponentAnalyzer<T> analyzer = new StronglyConnectedComponentAnalyzer<>(graph);
       analyzer.analyze();
-      throw new CyclePresentException("Graph (" + graph + ") has cycle(s): " + analyzer.renderCycles(), analyzer.getComponents());
+      throw new CyclePresentException("Graph (" + graph + ") has cycle(s): " + analyzer.renderCycles(), analyzer.components());
     }
     return results;
   }
