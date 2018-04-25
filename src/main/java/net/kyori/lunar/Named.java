@@ -28,7 +28,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 /**
  * Something with a name.
  */
-public interface Nameable {
+public interface Named {
   /**
    * Gets the name.
    *
