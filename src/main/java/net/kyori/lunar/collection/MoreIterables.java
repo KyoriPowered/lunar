@@ -24,6 +24,7 @@
 package net.kyori.lunar.collection;
 
 import com.google.common.collect.Iterables;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.Collection;
 import java.util.Random;
@@ -44,7 +45,7 @@ public final class MoreIterables {
    * @param <T> the type
    * @return a random element
    */
-  public static <T> T random(final Iterable<T> iterable) {
+  public static <T> /* @Nullable */ T random(final @NonNull Iterable<T> iterable) {
     return random(RANDOM, iterable);
   }
 
@@ -56,7 +57,7 @@ public final class MoreIterables {
    * @param <T> the type
    * @return a random element
    */
-  public static <T> T random(final Iterable<T> iterable, final Collection<T> allowed) {
+  public static <T> /* @Nullable */ T random(final @NonNull Iterable<T> iterable, final @NonNull Collection<T> allowed) {
     return random(Iterables.filter(iterable, allowed::contains));
   }
 
@@ -68,7 +69,7 @@ public final class MoreIterables {
    * @param <T> the type
    * @return a random element
    */
-  public static <T> T random(final Random random, final Iterable<T> iterable) {
+  public static <T> /* @Nullable */ T random(final @NonNull Random random, final @NonNull Iterable<T> iterable) {
     final int size = Iterables.size(iterable);
     if(size == 0) {
       throw new IndexOutOfBoundsException("cannot get random value from empty iterable");
@@ -86,7 +87,7 @@ public final class MoreIterables {
    * @param <T> the type
    * @return a random element
    */
-  public static <T> T random(final Random random, final Iterable<T> iterable, final Collection<T> allowed) {
+  public static <T> /* @Nullable */ T random(final @NonNull Random random, final @NonNull Iterable<T> iterable, final @NonNull Collection<T> allowed) {
     return random(random, Iterables.filter(iterable, allowed::contains));
   }
 }
