@@ -21,32 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar;
+package net.kyori.lunar.proxy;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import net.kyori.lunar.reflect.MoreMethodHandles;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.lang.invoke.MethodHandle;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 
 /**
- * A collection of utilities for working with {@link Optional}.
+ * An abstract implementation of an invocation handler that uses {@link MethodHandle method handles}.
  */
-public final class Optionals {
-  private Optionals() {
+public abstract class MethodHandleInvocationHandler implements InvocationHandler {
+  // A shared cache of unbound method handles.
+  private static final LoadingCache<Method, MethodHandle> SHARED_CACHE = CacheBuilder.newBuilder().build(CacheLoader.from(MoreMethodHandles::unreflect));
+  // A local cache of bound method handles.
+  private final LoadingCache<Method, MethodHandle> cache = CacheBuilder.newBuilder().build(CacheLoader.from(method -> {
+    final Object object = this.object(method);
+    return SHARED_CACHE.getUnchecked(method).bindTo(object);
+  }));
+
+  @Override
+  public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
+    return this.cache.getUnchecked(method).invokeWithArguments(args);
   }
 
-  /**
-   * Gets the first optional with a present value.
-   *
-   * @param optionals the optionals
-   * @param <T> the type
-   * @return an optional
-   */
-  @SafeVarargs
-  public static <T> @NonNull Optional<T> first(final @NonNull Optional<T>... optionals) {
-    return Arrays.stream(optionals)
-      .filter(Optional::isPresent)
-      .findFirst()
-      .orElse(Optional.empty());
-  }
+  protected abstract @NonNull Object object(final @NonNull Method method);
 }

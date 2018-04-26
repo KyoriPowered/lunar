@@ -21,32 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-
-import java.util.Arrays;
-import java.util.Optional;
+package net.kyori.lunar.proxy;
 
 /**
- * A collection of utilities for working with {@link Optional}.
+ * A marker interface for something that has been proxied.
  */
-public final class Optionals {
-  private Optionals() {
-  }
-
-  /**
-   * Gets the first optional with a present value.
-   *
-   * @param optionals the optionals
-   * @param <T> the type
-   * @return an optional
-   */
-  @SafeVarargs
-  public static <T> @NonNull Optional<T> first(final @NonNull Optional<T>... optionals) {
-    return Arrays.stream(optionals)
-      .filter(Optional::isPresent)
-      .findFirst()
-      .orElse(Optional.empty());
-  }
+public interface Proxied {
 }
