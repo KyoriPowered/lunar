@@ -21,32 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar;
+package net.kyori.lunar.proxy;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.lang.reflect.Method;
 
-/**
- * A collection of utilities for working with {@link Optional}.
- */
-public final class Optionals {
-  private Optionals() {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class MethodHandleInvocationHandlerTest {
+  @Test
+  void test() {
+    final B b = new B();
+    final A a = Proxies.create(A.class, new MethodHandleInvocationHandler() {
+      @Override
+      protected @NonNull Object object(final @NonNull Method method) {
+        return b;
+      }
+    });
+
+    assertEquals("foo", a.foo());
+    assertEquals("bar", a.bar("bar"));
   }
 
-  /**
-   * Gets the first optional with a present value.
-   *
-   * @param optionals the optionals
-   * @param <T> the type
-   * @return an optional
-   */
-  @SafeVarargs
-  public static <T> @NonNull Optional<T> first(final @NonNull Optional<T>... optionals) {
-    return Arrays.stream(optionals)
-      .filter(Optional::isPresent)
-      .findFirst()
-      .orElse(Optional.empty());
+  public interface A {
+    String foo();
+    String bar(final String string);
+  }
+
+  private static class B implements A {
+    @Override
+    public String foo() {
+      return "foo";
+    }
+
+    @Override
+    public String bar(final String string) {
+      return string;
+    }
   }
 }
