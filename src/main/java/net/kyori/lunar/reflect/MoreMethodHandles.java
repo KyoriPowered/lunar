@@ -139,13 +139,13 @@ public interface MoreMethodHandles {
  */
 final class MoreMethodHandles0 {
   private static final Constructor<MethodHandles.Lookup> LOOKUP_CONSTRUCTOR = EvenMoreObjects.get(Exceptions.rethrowSupplier(() -> {
-    final Constructor<MethodHandles.Lookup> constructor = MethodHandles.Lookup.class.getDeclaredConstructor(Class.class);
+    final Constructor<MethodHandles.Lookup> constructor = MethodHandles.Lookup.class.getDeclaredConstructor(Class.class, int.class);
     constructor.setAccessible(true);
     return constructor;
   }));
   private static final LoadingCache<Class<?>, MethodHandles.Lookup> LOOKUPS = CacheBuilder.newBuilder().build(CacheLoader.from(requestedLookupClass -> {
     try {
-      return LOOKUP_CONSTRUCTOR.newInstance(requestedLookupClass);
+      return LOOKUP_CONSTRUCTOR.newInstance(requestedLookupClass, MethodHandles.Lookup.PUBLIC | MethodHandles.Lookup.PRIVATE | MethodHandles.Lookup.PROTECTED | MethodHandles.Lookup.PACKAGE);
     } catch(final InstantiationException | IllegalAccessException | InvocationTargetException e) {
       throw Exceptions.rethrow(e);
     }
