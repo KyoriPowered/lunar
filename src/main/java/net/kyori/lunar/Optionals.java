@@ -24,6 +24,7 @@
 package net.kyori.lunar;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -33,6 +34,42 @@ import java.util.Optional;
  */
 public final class Optionals {
   private Optionals() {
+  }
+
+  /**
+   * Tests if the value held by {@code optional} is an instance of {@code type}.
+   *
+   * @param optional the optional
+   * @param type the type
+   * @return {@code true} if the value held by {@code optional} is an instance of {@code type}, {@code false} otherwise
+   */
+  public static boolean isInstance(final @NonNull Optional<?> optional, final @NonNull Class<?> type) {
+    return optional.isPresent() && type.isInstance(optional.get());
+  }
+
+  /**
+   * Casts {@code optional} to an optional of type {@code type} if the value held by {@code optional} is an instance of {@code type}
+   *
+   * @param optional the optional
+   * @param type the type
+   * @param <T> the type
+   * @return the optional
+   */
+  public static <T> @NonNull Optional<T> cast(final @NonNull Optional<? super T> optional, final @NonNull Class<T> type) {
+    // not necessary to re-wrap, we can just cast
+    return isInstance(optional, type) ? (Optional<T>) optional : Optional.empty();
+  }
+
+  /**
+   * Gets an optional of {@code object} if {@code object} is an instance of {@code type}, or an empty optional.
+   *
+   * @param object the object
+   * @param type the type
+   * @param <T> the type
+   * @return the optional
+   */
+  public static <T> @NonNull Optional<T> cast(final @Nullable Object object, final @NonNull Class<T> type) {
+    return type.isInstance(object) ? Optional.ofNullable((T) object) : Optional.empty();
   }
 
   /**
