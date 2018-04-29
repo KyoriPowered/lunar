@@ -28,8 +28,30 @@ import org.junit.jupiter.api.Test;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OptionalsTest {
+  @Test
+  void testIsInstance() {
+    assertFalse(Optionals.isInstance(Optional.empty(), A.class));
+    assertTrue(Optionals.isInstance(Optional.of(new B()), A.class));
+    assertFalse(Optionals.isInstance(Optional.of(new C()), A.class));
+  }
+
+  @Test
+  void testObjectCast() {
+    assertFalse(Optionals.cast(new C(), A.class).isPresent());
+    assertTrue(Optionals.cast(new B(), A.class).isPresent());
+  }
+
+  @Test
+  void testOptionalCast() {
+    assertFalse(Optionals.cast(Optional.of(new C()), A.class).isPresent());
+    assertFalse(Optionals.cast(Optional.empty(), A.class).isPresent());
+    assertTrue(Optionals.cast(Optional.of(new B()), A.class).isPresent());
+  }
+
   @Test
   void testFirst() {
     final Optional<String> expected = Optional.of("meow");
@@ -49,4 +71,8 @@ class OptionalsTest {
       expected
     ));
   }
+
+  private interface A {}
+  private static class B implements A {}
+  private static class C {}
 }
