@@ -55,7 +55,7 @@ public final class Optionals {
    * @param <T> the type
    * @return the optional
    */
-  public static <T> @NonNull Optional<T> cast(final @NonNull Optional<? super T> optional, final @NonNull Class<T> type) {
+  public static <T> @NonNull Optional<T> cast(final @NonNull Optional<?> optional, final @NonNull Class<T> type) {
     // not necessary to re-wrap, we can just cast
     return isInstance(optional, type) ? (Optional<T>) optional : Optional.empty();
   }
