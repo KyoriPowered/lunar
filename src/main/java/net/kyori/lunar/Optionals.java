@@ -69,7 +69,7 @@ public final class Optionals {
    * @return the optional
    */
   public static <T> @NonNull Optional<T> cast(final @Nullable Object object, final @NonNull Class<T> type) {
-    return type.isInstance(object) ? Optional.ofNullable((T) object) : Optional.empty();
+    return type.isInstance(object) ? Optional.of((T) object) : Optional.empty();
   }
 
   /**
