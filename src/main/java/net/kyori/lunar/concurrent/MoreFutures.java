@@ -26,6 +26,7 @@ package net.kyori.lunar.concurrent;
 import com.google.common.util.concurrent.Futures;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -33,6 +34,16 @@ import java.util.concurrent.CompletableFuture;
  */
 public final class MoreFutures {
   private MoreFutures() {
+  }
+
+  /**
+   * Returns a completable future that is completed with an {@link Optional#empty() empty Optional}.
+   *
+   * @param <T> the type
+   * @return a completable future that is completed with an empty Optional
+   */
+  public static <T> @NonNull CompletableFuture<Optional<T>> emptyOptionalFuture() {
+    return CompletableFuture.completedFuture(Optional.empty());
   }
 
   /**
