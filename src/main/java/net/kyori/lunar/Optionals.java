@@ -28,23 +28,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * A collection of utilities for working with {@link Optional}.
  */
 public final class Optionals {
   private Optionals() {
-  }
-
-  /**
-   * Tests if the value held by {@code optional} is an instance of {@code type}.
-   *
-   * @param optional the optional
-   * @param type the type
-   * @return {@code true} if the value held by {@code optional} is an instance of {@code type}, {@code false} otherwise
-   */
-  public static boolean isInstance(final @NonNull Optional<?> optional, final @NonNull Class<?> type) {
-    return optional.isPresent() && type.isInstance(optional.get());
   }
 
   /**
@@ -85,5 +75,33 @@ public final class Optionals {
       .filter(Optional::isPresent)
       .findFirst()
       .orElse(Optional.empty());
+  }
+
+  /**
+   * Tests if the value held by {@code optional} is an instance of {@code type}.
+   *
+   * @param optional the optional
+   * @param type the type
+   * @return {@code true} if the value held by {@code optional} is an instance of {@code type}, {@code false} otherwise
+   */
+  public static boolean isInstance(final @NonNull Optional<?> optional, final @NonNull Class<?> type) {
+    return optional.isPresent() && type.isInstance(optional.get());
+  }
+
+  /**
+   * Returns {@code optional} if a value is present within it, otherwise returns an {@code Optional} provided by {@code supplier}.
+   *
+   * @param optional the optional
+   * @param supplier the supplier
+   * @param <T> the type
+   * @return an optional
+   * @deprecated use {@link Optional#or(Supplier)}
+   */
+  @Deprecated
+  public static <T> @NonNull Optional<T> or(final @NonNull Optional<? extends T> optional, final @NonNull Supplier<? extends Optional<? extends T>> supplier) {
+    if(optional.isPresent()) {
+      return (Optional<T>) optional;
+    }
+    return (Optional<T>) supplier.get();
   }
 }

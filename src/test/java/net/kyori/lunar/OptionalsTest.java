@@ -33,13 +33,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OptionalsTest {
   @Test
-  void testIsInstance() {
-    assertFalse(Optionals.isInstance(Optional.empty(), A.class));
-    assertTrue(Optionals.isInstance(Optional.of(new B()), A.class));
-    assertFalse(Optionals.isInstance(Optional.of(new C()), A.class));
-  }
-
-  @Test
   void testObjectCast() {
     assertFalse(Optionals.cast(new C(), A.class).isPresent());
     assertTrue(Optionals.cast(new B(), A.class).isPresent());
@@ -70,6 +63,22 @@ class OptionalsTest {
       Optional.empty(),
       expected
     ));
+  }
+
+  @Test
+  void testIsInstance() {
+    assertFalse(Optionals.isInstance(Optional.empty(), A.class));
+    assertTrue(Optionals.isInstance(Optional.of(new B()), A.class));
+    assertFalse(Optionals.isInstance(Optional.of(new C()), A.class));
+  }
+
+  @Test
+  void testOr() {
+    final Optional<String> empty = Optional.empty();
+    final Optional<String> wanted = Optional.of("meow");
+    final Optional<String> unwanted = Optional.of("hiss");
+    assertEquals(wanted, Optionals.or(empty, () -> wanted));
+    assertEquals(wanted, Optionals.or(wanted, () -> unwanted));
   }
 
   private interface A {}
