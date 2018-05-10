@@ -29,16 +29,20 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class HierarchyTest {
   @Test
   void testFind() {
     final List<Class<?>> classes = Arrays.asList(Thing1.class, ThingA.class);
     assertEquals(ThingA.class, Hierarchy.find(ThingB.class, Thing1.class, classes::contains));
+    assertEquals(Object.class, Hierarchy.find(ThingB.class, Object.class, c -> c == Object.class));
+    assertNull(Hierarchy.find(ThingB.class, Object.class, c -> c.getSuperclass() == Thing3.class));
   }
 
   private interface Thing1 {}
   private interface Thing2 {}
+  private interface Thing3 {}
   private static class ThingA implements Thing1 {}
   private static class ThingB extends ThingA implements Thing2 {}
 }
