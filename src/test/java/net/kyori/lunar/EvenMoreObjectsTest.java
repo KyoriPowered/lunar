@@ -27,11 +27,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EvenMoreObjectsTest {
   @Test
@@ -54,9 +55,25 @@ class EvenMoreObjectsTest {
   }
 
   @Test
+  void testMakeCreator() {
+    final List<String> values = EvenMoreObjects.make(
+      new ArrayList<String>(),
+      (list) -> {
+        list.add("abc");
+        list.add("def");
+      },
+      Collections::unmodifiableList
+    );
+    assertEquals(2, values.size());
+    assertEquals("abc", values.get(0));
+    assertEquals("def", values.get(1));
+    assertThrows(UnsupportedOperationException.class, () -> values.add("ghi"));
+  }
+
+  @Test
   void testEquals() {
-    assertTrue(new Foo(0).equals(new Foo(0)));
-    assertFalse(new Foo(0).equals(new Foo(1)));
+    assertEquals(new Foo(0), new Foo(0));
+    assertNotEquals(new Foo(0), new Foo(1));
   }
 
   private static class Foo {
