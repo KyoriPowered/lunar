@@ -41,6 +41,7 @@ public interface Proxies {
    *
    * @param interfaceType the interface for the proxy class to implement
    * @param handler the invocation handler to dispatch method invocations to
+   * @param <T> the type
    * @return a proxy instance
    * @throws IllegalArgumentException if {@code interfaces} contains a class that is not an interface
    */
@@ -54,6 +55,7 @@ public interface Proxies {
    * @param loader the class loader to define the proxy class
    * @param interfaceType the interface for the proxy class to implement
    * @param handler the invocation handler to dispatch method invocations to
+   * @param <T> the type
    * @return a proxy instance
    * @throws IllegalArgumentException if {@code interfaces} contains a class that is not an interface
    */
@@ -68,6 +70,7 @@ public interface Proxies {
    * @param interfaceType the interface for the proxy class to implement
    * @param interfaces the list of interfaces for the proxy class to implement
    * @param handler the invocation handler to dispatch method invocations to
+   * @param <T> the type
    * @return a proxy instance
    * @throws IllegalArgumentException if {@code interfaces} contains a class that is not an interface
    */
@@ -82,6 +85,7 @@ public interface Proxies {
    * @param interfaceType the interface for the proxy class to implement
    * @param interfaces the list of interfaces for the proxy class to implement
    * @param handler the invocation handler to dispatch method invocations to
+   * @param <T> the type
    * @return a proxy instance
    * @throws IllegalArgumentException if {@code interfaces} contains a class that is not an interface
    */

@@ -211,6 +211,7 @@ public final class Exceptions {
    *
    * @param runnable the runnable
    * @param <E> the exception type
+   * @return the runnable
    */
   public static <E extends Throwable> @NonNull Runnable rethrowRunnable(final @NonNull ThrowingRunnable<E> runnable) {
     return runnable;
