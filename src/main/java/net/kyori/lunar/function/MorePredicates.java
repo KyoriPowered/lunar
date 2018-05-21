@@ -41,9 +41,8 @@ public interface MorePredicates {
    * @param <T> the type
    * @return a predicate
    */
-  @SuppressWarnings("unchecked")
   static <T> @NonNull Predicate<T> alwaysFalse() {
-    return (Predicate<T>) MorePredicates0.ALWAYS_FALSE;
+    return input -> false;
   }
 
   /**
@@ -52,9 +51,8 @@ public interface MorePredicates {
    * @param <T> the type
    * @return a predicate
    */
-  @SuppressWarnings("unchecked")
   static <T> @NonNull Predicate<T> alwaysTrue() {
-    return (Predicate<T>) MorePredicates0.ALWAYS_TRUE;
+    return input -> true;
   }
 
   /**
@@ -63,9 +61,8 @@ public interface MorePredicates {
    * @param <T> the type
    * @return a predicate
    */
-  @SuppressWarnings("unchecked")
   static <T> @NonNull Predicate<T> isNull() {
-    return (Predicate<T>) MorePredicates0.IS_NULL;
+    return Objects::isNull;
   }
 
   /**
@@ -74,15 +71,7 @@ public interface MorePredicates {
    * @param <T> the type
    * @return a predicate
    */
-  @SuppressWarnings("unchecked")
   static <T> @NonNull Predicate<T> nonNull() {
-    return (Predicate<T>) MorePredicates0.NON_NULL;
+    return Objects::nonNull;
   }
-}
-
-final class MorePredicates0 {
-  static final Predicate<?> ALWAYS_FALSE = input -> false;
-  static final Predicate<?> ALWAYS_TRUE = input -> true;
-  static final Predicate<?> IS_NULL = Objects::isNull;
-  static final Predicate<?> NON_NULL = Objects::nonNull;
 }
