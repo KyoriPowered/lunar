@@ -45,7 +45,7 @@ public final class EvenMoreObjects {
    * @param <T> the value type
    * @return the value
    */
-  public static <T> @NonNull T get(final Supplier<T> supplier) {
+  public static <T> @NonNull T make(final Supplier<T> supplier) {
     return supplier.get();
   }
 
