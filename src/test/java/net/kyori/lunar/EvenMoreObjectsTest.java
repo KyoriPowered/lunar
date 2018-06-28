@@ -36,15 +36,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EvenMoreObjectsTest {
   @Test
-  void testGet() {
-    final List<String> values = EvenMoreObjects.get(() -> Arrays.asList("abc", "def"));
+  void testMakeSupplier() {
+    final List<String> values = EvenMoreObjects.make(() -> Arrays.asList("abc", "def"));
     assertEquals(2, values.size());
     assertEquals("abc", values.get(0));
     assertEquals("def", values.get(1));
   }
 
   @Test
-  void testMake() {
+  void testMakeConsumer() {
     final List<String> values = EvenMoreObjects.make(new ArrayList<>(), (list) -> {
       list.add("abc");
       list.add("def");
