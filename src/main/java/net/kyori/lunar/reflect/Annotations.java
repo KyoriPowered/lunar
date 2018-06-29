@@ -21,22 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar;
+package net.kyori.lunar.reflect;
 
-import org.junit.jupiter.api.Test;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-import java.util.OptionalDouble;
+import java.lang.annotation.Annotation;
+import java.util.Optional;
+import java.util.function.Function;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class PrimitiveOptionalsTest {
-  @Test
-  void testMap() {
-    assertEquals(20.566, PrimitiveOptionals.map(OptionalDouble.of(10.283), value -> value * 2).getAsDouble(), 0.0);
-  }
-
-  @Test
-  void testMapToInt() {
-    assertEquals(10, PrimitiveOptionals.mapToInt(OptionalDouble.of(10.283), value -> (int) value).getAsInt());
+/**
+ * A collection of utilities for working with annotations.
+ */
+public interface Annotations {
+  /**
+   * Gets a value from an annotation.
+   *
+   * @param annotation the annotation
+   * @param function the function
+   * @param <A> the annotation type
+   * @param <V> the value type
+   * @return the value
+   */
+  static <A extends Annotation, V> @Nullable Optional<V> value(final @Nullable A annotation, final @NonNull Function<A, V> function) {
+    if(annotation != null) {
+      return Optional.ofNullable(function.apply(annotation));
+    }
+    return Optional.empty();
   }
 }
