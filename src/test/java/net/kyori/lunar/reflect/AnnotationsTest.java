@@ -21,22 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar;
+package net.kyori.lunar.reflect;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.OptionalDouble;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PrimitiveOptionalsTest {
+class AnnotationsTest {
   @Test
-  void testMap() {
-    assertEquals(20.566, PrimitiveOptionals.map(OptionalDouble.of(10.283), value -> value * 2).getAsDouble(), 0.0);
+  void testValue() {
+    final Foo foo = Bar.class.getAnnotation(Foo.class);
+    assertEquals("def", Annotations.value(foo, Foo::abc).orElse(null));
+    assertEquals("abc", Annotations.value(foo, Foo::def).orElse(null));
   }
 
-  @Test
-  void testMapToInt() {
-    assertEquals(10, PrimitiveOptionals.mapToInt(OptionalDouble.of(10.283), value -> (int) value).getAsInt());
+  @Foo(
+    abc = "def",
+    def = "abc"
+  )
+  private class Bar {
+  }
+
+  @Retention(RetentionPolicy.RUNTIME)
+  private @interface Foo {
+    String abc();
+
+    String def();
   }
 }
