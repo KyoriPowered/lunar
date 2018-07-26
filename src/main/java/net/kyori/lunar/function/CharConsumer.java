@@ -26,14 +26,14 @@ package net.kyori.lunar.function;
 import java.util.function.Consumer;
 
 /**
- * A {@link Consumer} that accepts a {@code float}.
+ * A {@link Consumer} that accepts a {@code char}.
  */
 @FunctionalInterface
-public interface FloatConsumer {
+public interface CharConsumer {
   /**
    * Performs this operation on the given argument.
    *
    * @param input the input
    */
-  void accept(final float input);
+  void accept(final char input);
 }

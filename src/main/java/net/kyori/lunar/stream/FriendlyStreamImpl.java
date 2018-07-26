@@ -21,19 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.kyori.lunar.function;
+package net.kyori.lunar.stream;
 
-import java.util.function.Consumer;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
-/**
- * A {@link Consumer} that accepts a {@code float}.
- */
-@FunctionalInterface
-public interface FloatConsumer {
-  /**
-   * Performs this operation on the given argument.
-   *
-   * @param input the input
-   */
-  void accept(final float input);
+import java.util.stream.Stream;
+
+/* package */ final class FriendlyStreamImpl<T> implements ForwardingStream<T>, FriendlyStream<T> {
+  private final @NonNull Stream<T> stream;
+
+  /* package */ FriendlyStreamImpl(final @NonNull Stream<T> stream) {
+    this.stream = stream;
+  }
+
+  @Override
+  public @NonNull Stream<T> stream() {
+    return this.stream;
+  }
 }
