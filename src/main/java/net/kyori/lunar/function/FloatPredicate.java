@@ -30,19 +30,19 @@ import java.util.function.Predicate;
 import static java.util.Objects.requireNonNull;
 
 /**
- * A predicate of one {@code char}-valued argument.
+ * A predicate of one {@code float}-valued argument.
  *
  * @see Predicate
  */
 @FunctionalInterface
-public interface CharPredicate {
+public interface FloatPredicate {
   /**
    * Evaluates this predicate on the given argument.
    *
    * @param input the input argument
    * @return {@code true} if the input argument matches the predicate, {@code false} otherwise
    */
-  boolean test(final char input);
+  boolean test(final float input);
 
   /**
    * Returns a composed predicate that represents a short-circuiting logical
@@ -52,7 +52,7 @@ public interface CharPredicate {
    * @return a composed predicate that represents the short-circuiting logical
    *   AND of this predicate and the {@code other} predicate
    */
-  default @NonNull CharPredicate and(final @NonNull CharPredicate other) {
+  default @NonNull FloatPredicate and(final @NonNull FloatPredicate other) {
     requireNonNull(other, "other");
     return (value) -> this.test(value) && other.test(value);
   }
@@ -62,7 +62,7 @@ public interface CharPredicate {
    *
    * @return a predicate that represents the logical negation of this predicate
    */
-  default @NonNull CharPredicate negate() {
+  default @NonNull FloatPredicate negate() {
     return (input) -> !this.test(input);
   }
 
@@ -74,7 +74,7 @@ public interface CharPredicate {
    * @return a composed predicate that represents the short-circuiting logical
    *   OR of this predicate and the {@code other} predicate
    */
-  default @NonNull CharPredicate or(final @NonNull CharPredicate other) {
+  default @NonNull FloatPredicate or(final @NonNull FloatPredicate other) {
     requireNonNull(other, "other");
     return (value) -> this.test(value) || other.test(value);
   }
