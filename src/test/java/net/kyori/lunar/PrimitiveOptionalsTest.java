@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PrimitiveOptionalsTest {
   @Test
   void testMap() {
-    assertEquals(20.566, PrimitiveOptionals.map(OptionalDouble.of(10.283), value -> value * 2).getAsDouble(), 0.0);
+    assertEquals(20.566, PrimitiveOptionals.map(OptionalDouble.of(10.283), value -> value * 2).getAsDouble());
   }
 
   @Test
