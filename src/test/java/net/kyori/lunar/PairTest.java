@@ -40,7 +40,7 @@ class PairTest {
     assertNull(left.right());
 
     final Pair<String, String> right = Pair.right("def");
-    assertNull(left.left());
+    assertNull(right.left());
     assertEquals("def", right.right());
   }
 
