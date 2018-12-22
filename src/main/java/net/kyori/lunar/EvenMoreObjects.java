@@ -26,54 +26,13 @@ package net.kyori.lunar;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 /**
  * A collection of utilities for working with objects.
  */
 public final class EvenMoreObjects {
   private EvenMoreObjects() {
-  }
-
-  /**
-   * Gets a {@code T} from {@code supplier}.
-   *
-   * @param supplier the supplier
-   * @param <T> the value type
-   * @return the value
-   */
-  public static <T> @NonNull T make(final Supplier<T> supplier) {
-    return supplier.get();
-  }
-
-  /**
-   * Configures {@code value} using {@code consumer}.
-   *
-   * @param value the value
-   * @param consumer the consumer
-   * @param <T> the value type
-   * @return the value
-   */
-  public static <T> @NonNull T make(final @NonNull T value, final @NonNull Consumer<T> consumer) {
-    consumer.accept(value);
-    return value;
-  }
-
-  /**
-   * Configures {@code builder} using {@code consumer} and then builds it using {@code creator}.
-   *
-   * @param builder the builder
-   * @param consumer the consumer
-   * @param creator the creator
-   * @param <B> the builder type
-   * @param <C> the creator type
-   * @return the value
-   */
-  public static <B, C> @NonNull C make(final @NonNull B builder, final @NonNull Consumer<B> consumer, final @NonNull Function<B, C> creator) {
-    return creator.apply(make(builder, consumer));
   }
 
   /**

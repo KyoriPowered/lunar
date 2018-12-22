@@ -26,8 +26,9 @@ package net.kyori.lunar.reflect;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import net.kyori.lunar.EvenMoreObjects;
-import net.kyori.lunar.exception.Exceptions;
+import net.kyori.lambda.Composer;
+import net.kyori.lambda.exception.Exceptions;
+import net.kyori.lambda.function.ThrowingSupplier;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.lang.invoke.MethodHandle;
@@ -138,7 +139,7 @@ public interface MoreMethodHandles {
  * I exist only for Java 8 compatibility.
  */
 final class MoreMethodHandles0 {
-  private static final Constructor<MethodHandles.Lookup> LOOKUP_CONSTRUCTOR = EvenMoreObjects.make(Exceptions.rethrowSupplier(() -> {
+  private static final Constructor<MethodHandles.Lookup> LOOKUP_CONSTRUCTOR = Composer.get(ThrowingSupplier.of(() -> {
     final Constructor<MethodHandles.Lookup> constructor = MethodHandles.Lookup.class.getDeclaredConstructor(Class.class, int.class);
     constructor.setAccessible(true);
     return constructor;

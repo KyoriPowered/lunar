@@ -25,51 +25,10 @@ package net.kyori.lunar;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EvenMoreObjectsTest {
-  @Test
-  void testMakeSupplier() {
-    final List<String> values = EvenMoreObjects.make(() -> Arrays.asList("abc", "def"));
-    assertEquals(2, values.size());
-    assertEquals("abc", values.get(0));
-    assertEquals("def", values.get(1));
-  }
-
-  @Test
-  void testMakeConsumer() {
-    final List<String> values = EvenMoreObjects.make(new ArrayList<>(), (list) -> {
-      list.add("abc");
-      list.add("def");
-    });
-    assertEquals(2, values.size());
-    assertEquals("abc", values.get(0));
-    assertEquals("def", values.get(1));
-  }
-
-  @Test
-  void testMakeCreator() {
-    final List<String> values = EvenMoreObjects.make(
-      new ArrayList<String>(),
-      (list) -> {
-        list.add("abc");
-        list.add("def");
-      },
-      Collections::unmodifiableList
-    );
-    assertEquals(2, values.size());
-    assertEquals("abc", values.get(0));
-    assertEquals("def", values.get(1));
-    assertThrows(UnsupportedOperationException.class, () -> values.add("ghi"));
-  }
-
   @Test
   void testEquals() {
     assertEquals(new Foo(0), new Foo(0));

@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'net.kyori'
-version '1.0.7-SNAPSHOT'
+version '1.1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -26,10 +26,14 @@ license {
 repositories {
   mavenLocal()
   mavenCentral()
+  maven {
+    url 'https://oss.sonatype.org/content/groups/public/'
+  }
 }
 
 dependencies {
   compile 'com.google.guava:guava:21.0'
+  compile 'net.kyori:lambda:1.0.0-SNAPSHOT'
   compile 'org.checkerframework:checker-qual:2.4.0'
   testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.3'
   testCompile 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
